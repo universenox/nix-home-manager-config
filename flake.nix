@@ -9,9 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #zsh.url = "./zsh";
+    # consistent theming across all my apps
+    nix-colors.url = "github:misterio77/nix-colors";
   };
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, nix-colors, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -19,6 +20,7 @@
     {
       homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit nix-colors; };
         modules = [ ./home.nix ];
       };
     };

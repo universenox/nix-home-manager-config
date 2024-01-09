@@ -2,15 +2,12 @@
 {
   programs.zsh = {
     enable = true;
-    autocd = true;
     enableCompletion = true;
     enableAutosuggestions = true;
     oh-my-zsh = {
       enable = true;
     };
     shellAliases = {
-      reload = "source ~/.zshrc";
-      edit-profile = "nvim ~/.zshrc";
       nd = "nix develop --command zsh";
     };
     sessionVariables = {

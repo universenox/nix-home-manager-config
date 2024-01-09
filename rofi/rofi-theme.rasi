@@ -5,18 +5,7 @@
  *******************************************************************************/
 
 * {
-    bg0:    #d583d6; /* main bg*/
-    bg1:    #ffffff; /* search box bg */
-    bg2:    #000000; /* idk */
-    bg3:    #69a3fa; /* selected bg */
-    fg0:    #ffffff; /* text */
-    fg1:    #ad6da8; /* idk */
-    fg2:    #ad6da8; /* left text */
-    fg3:    #5498ff; /* search text */
-}
-
-* {
-    font:   "Noto Sans 12";
+    font:   "Nerd Font 12";
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -40,7 +29,7 @@ mainbox {
 
 inputbar {
     background-color:   @bg1;
-    border-color:       @bg3;
+    border-color:       @fg2;
 
     border:         2px;
     border-radius:  16px;
@@ -51,19 +40,19 @@ inputbar {
 }
 
 prompt {
-    text-color: @fg2;
+    text-color: @fg1;
 }
 
 entry {
     placeholder:        "Search";
-    placeholder-color:  @fg3;
+    placeholder-color:  @fg2;
 }
 
 message {
     margin:             12px 0 0;
     border-radius:      16px;
-    border-color:       @bg2;
-    background-color:   @bg2;
+    border-color:       @fg2;
+    background-color:   @bg1;
 }
 
 textbox {
@@ -87,11 +76,11 @@ element {
 }
 
 element normal active {
-    text-color: @bg3;
+    text-color: @fg1;
 }
 
 element selected normal, element selected active {
-    background-color:   @bg3;
+    background-color:   @bg2;
 }
 
 element-icon {

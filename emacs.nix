@@ -7,7 +7,7 @@
   home.packages = [ pkgs.emacs-all-the-icons-fonts ];
 
   home.shellAliases = {
-    e = ''emacsclient -nw -c -a "" ''; # within terminal
-    ee = ''emacsclient -c -a ""'';
+    emacsclientnw = ''emacsclient -nw -c -a "" ''; # within terminal
+    emacsclient = ''emacsclient -c -a ""'';
   };
 }

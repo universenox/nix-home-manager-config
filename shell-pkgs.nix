@@ -3,66 +3,65 @@
   imports = [ ./rofi ./kitty ];
   home = {
     shellAliases = {
-      find = "bfs";
       list-fonts = "fc-list";
+      e = "hx";
 
       ls = "lsd";
       cat = "bat --paging=never";
       catp = "bat --no-paging --plain";
-    };
-    sessionVariables = {
-      EDITOR = "vim";
-      TERMINAL = "kitty";
-      # fzf with preview using pistol -- doesn't work
-      #FZF_DEFAULT_COMMAND="fzf --preview='pistol -c ~/.pistol.conf {}' --preview-window '~3'";
-    };
-    packages = with pkgs; [
-      ripgrep
-      btop
-      bfs # another find alt
-      fd # find alt
-      sd # sed alt
-      gh # cli github
-      lsd # ls alt
-      xclip
-      hexyl
 
-      wayshot # todo: would like alternative.
-    ];
-
-  };
-  programs = {
-    bash.enable = true;
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-      # defaultCommand = 
-      # defaultOptions = 
-    };
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    bat = {
-      enable = true;
-      config = {
-        theme = "Solarized (light)";
+      # screenshot
+      ss = "grim -g \"$(slurp -d)\" - | swappy -f -"
+        };
+      sessionVariables = {
+        TERMINAL = "kitty";
+        EDITOR = "hx";
+        VISUAL = "hx";
       };
-    };
-    nix-index.enable = true;
-    lazygit.enable = true;
-    less.enable = true;
-    zoxide.enable = true;
-    autojump.enable = true;
+      packages = with pkgs; [
+        ripgrep
+        btop
+        fd # find alt
+        sd # sed alt
+        gh # cli github
+        lsd # ls alt
+        xclip
+        hexyl
 
-    pistol = {
-      enable = true;
-      associations = [
-        { mime = "text/*"; command = "bat %pistol-filename%"; }
-        { mime = "inode/directory"; command = "lsd %pistol-filename%"; }
-        # TODO: this will fail bc kitty inside previewer gets wrong dimensions
-        { mime = "image/*"; command = "kitten icat %pistol-filename%"; }
+        ranger # cli file browser, but hmm, fzf...
+        file # opt dep of ranger
+
+        wl-clipboard # for helix yank to system clipboard
+        wayshot # todo: would like alternative.
       ];
+
+      # for nix-direnv
+      file.".env".text = ''
+        use nix
+        use flake
+      '';
     };
-  };
-}
+    programs = {
+      helix = {
+        enable = true;
+        defaultEditor = true;
+      };
+      bash.enable = true;
+      fzf = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+      bat = {
+        enable = true;
+      };
+      nix-index.enable = true;
+      lazygit.enable = true;
+      less.enable = true;
+      zoxide.enable = true;
+      autojump.enable = true;
+    };
+  }

@@ -1,27 +1,20 @@
 { lib, config, pkgs, ... }:
 {
+  home.sessionVariables = {
+    GLFW_IM_MODULE = "ibus"; # enable working with fcitx5 switching JP/EN keyb
+  };
   programs.kitty = {
     enable = true;
     settings = {
       enable_audio_bell = false;
-      background_opacity = "0.90";
-      background_blur = 20;
       bell_on_tab = "🔔 ";
       scrollback_lines = 10000;
-      theme = builtins.readFile ./Aquarium_Light.conf;
+      font_family = "Noto";
+      symbol_map = "U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols";
+
+      # nix-colors theme
+      foreground = "#${config.colorScheme.colors.base05}";
+      background = "#${config.colorScheme.colors.base00}";
     };
   };
-  # todo
-  #home.packages = [
-  #  {
-  #    name = "kitty-fzf-preview";
-  #    file = "bin/fzf-preview.sh";
-  #    src = pkgs.fetchFromGithub{
-  #      owner="junegunn";
-  #      repo="fzf";
-  #      rev="41d4d70b985f665c8ecc66b83aa10209c8dfbbfd";
-  #      sha256="";
-  #    };
-  #  }
-  #];
 }
