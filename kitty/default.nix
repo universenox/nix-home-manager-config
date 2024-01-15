@@ -3,6 +3,7 @@
   home.sessionVariables = {
     GLFW_IM_MODULE = "ibus"; # enable working with fcitx5 switching JP/EN keyb
   };
+  home.sessionVariables.TERMINAL = "kitty";
   programs.kitty = {
     enable = true;
     settings = {
