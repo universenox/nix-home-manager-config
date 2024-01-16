@@ -27,6 +27,7 @@
         extraSpecialArgs = { inherit nix-colors; };
         modules = [ 
           nix-colors.homeManagerModules.default
+          ./common.nix
           ./home.nix 
           my-zsh.homeManagerModules.default 
         ];
@@ -37,6 +38,7 @@
         extraSpecialArgs = { inherit nix-colors; };
         modules = [ 
           nix-colors.homeManagerModules.default
+          ./common.nix
           ./work-home.nix 
           my-zsh.homeManagerModules.default
         ];
