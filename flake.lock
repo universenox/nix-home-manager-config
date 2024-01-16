@@ -23,40 +23,27 @@
         ]
       },
       "locked": {
-        "lastModified": 1705169127,
-        "narHash": "sha256-j9OEtNxOIPWZWjbECVMkI1TO17SzlpHMm0LnVWKOR/g=",
+        "lastModified": 1705347059,
+        "narHash": "sha256-MSdJZDeyBIjf1SAZ7OvA44b00zUGTrDxkAm9vVR+XRk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f2942f3385f1b35cc8a1abb03a45e29c9cb4d3c8",
+        "rev": "8c3b2a0cab64a464de9e41a470eecf1318ccff57",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "home-manager_2": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1705169127,
-        "narHash": "sha256-j9OEtNxOIPWZWjbECVMkI1TO17SzlpHMm0LnVWKOR/g=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "f2942f3385f1b35cc8a1abb03a45e29c9cb4d3c8",
-        "type": "github"
-      },
-      "original": {
-        "id": "home-manager",
-        "type": "indirect"
       }
     },
     "my-zsh": {
       "inputs": {
-        "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_2",
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "zplug-fzf-tab": "zplug-fzf-tab",
         "zplug-nix-shell": "zplug-nix-shell",
         "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
@@ -64,18 +51,14 @@
         "zplug-zsh-syntax-highlighting": "zplug-zsh-syntax-highlighting"
       },
       "locked": {
-        "dir": "zsh",
-        "dirtyRev": "8fe960d46ef6639e557ca1882312c6f1fe82a781-dirty",
-        "dirtyShortRev": "8fe960d-dirty",
-        "lastModified": 1704841509,
-        "narHash": "sha256-PChxoajC++GiYQAgCYXI8XF6Nxs1y70ju8aJ4QPL2YY=",
-        "type": "git",
-        "url": "file:///nix/store/jql7f40kyh137j65vyd9zkinw1j69r4c-source?dir=zsh"
+        "lastModified": 1,
+        "narHash": "sha256-iJKjq6aB3uKW0zUuQLVe9q3zrB9NEhCuocjykyK3Cuw=",
+        "path": "./zsh",
+        "type": "path"
       },
       "original": {
-        "dir": "zsh",
-        "type": "git",
-        "url": "file:///nix/store/jql7f40kyh137j65vyd9zkinw1j69r4c-source?dir=zsh"
+        "path": "./zsh",
+        "type": "path"
       }
     },
     "nix-colors": {
@@ -99,15 +82,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1703961334,
-        "narHash": "sha256-M1mV/Cq+pgjk0rt6VxoyyD+O8cOUiai8t9Q6Yyq4noY=",
-        "owner": "NixOS",
+        "lastModified": 1705133751,
+        "narHash": "sha256-rCIsyE80jgiOU78gCWN3A0wE0tR2GI5nH6MlS+HaaSQ=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b0d36bd0a420ecee3bc916c91886caca87c894e9",
+        "rev": "9b19f5e77dd906cb52dade0b7bd280339d2a1f3d",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -128,42 +111,12 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1705204527,
-        "narHash": "sha256-WVz9WdaFBhAwO/7A+HlW8HPJ4VQ8QnpCD1WZAcAPneo=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "dd5621df6dcb90122b50da5ec31c411a0de3e538",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1705133751,
-        "narHash": "sha256-rCIsyE80jgiOU78gCWN3A0wE0tR2GI5nH6MlS+HaaSQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "9b19f5e77dd906cb52dade0b7bd280339d2a1f3d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "my-zsh": "my-zsh",
         "nix-colors": "nix-colors",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs"
       }
     },
     "zplug-fzf-tab": {

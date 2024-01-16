@@ -29,7 +29,8 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      lib = pkgs.lib;
     in { 
-      homeManagerModules.default = (import ./. { inherit pkgs; inherit inputs;}  );
+      homeManagerModules.default = (import ./default.nix { inherit pkgs; inherit inputs;}  );
     };
 }

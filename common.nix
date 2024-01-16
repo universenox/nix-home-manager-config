@@ -35,7 +35,9 @@
       sd # sed alt
       lsd # ls alt
       xclip
+
       tree
+      nix-tree
 
       shellcheck
       shfmt

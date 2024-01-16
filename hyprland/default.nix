@@ -1,6 +1,8 @@
 { lib, config, pkgs, ... }:
 with config.colorScheme.colors;
 {
+  imports = [ ./waybar.nix ];
+
   home.packages = with pkgs; [
     hyprpicker # colorpicker
     hyprpaper # wallpapers
@@ -19,7 +21,6 @@ with config.colorScheme.colors;
     builtins.readFile (./appearance.conf)
     +
     ''
-
   general { 
     col.active_border = rgba(${base00}ff) rgba(${base05}cc) 45deg 
     col.inactive_border = rgba(${base08}00)  
@@ -39,47 +40,4 @@ with config.colorScheme.colors;
       wallpaper = eDP-1, ${wall}
       ipc = off
     '';
-
-  home.file.".config/waybar/style.css".text = ''
-    * {
-    	font-size: 16px;
-    	font-family: "Noto";
-    }
-
-    window#waybar {
-    	background: transparent;
-    	color: #${base0A};
-    }
-
-    #workspaces,
-    #clock,
-    #pulseaudio,
-    #pulseaudio,
-    #memory,
-    #cpu,
-    #battery,
-    #network,
-    #disk,
-    #term,
-    #tray {
-    	border-radius: 25px;
-    	background: #${base01};
-    	padding: 0 10px;
-    }
-
-    #workspaces button {
-        padding: 0 5px;
-        background: transparent;
-        color: #${base0A};
-        border-top: 2px solid transparent;
-    }
-
-    #workspaces button.focused {
-        color: #${base0B};
-        border-top: 2px solid #${base0C};
-    }
-  '';
-  home.file.".config/waybar/config.json".source = ./waybar/config.json;
-
-
 }

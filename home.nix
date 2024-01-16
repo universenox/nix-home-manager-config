@@ -19,15 +19,17 @@
     };
 
     # for nix-direnv
-    file.".env".text = ''
-      use nix
-      use flake
-    '';
+    # file.".env".text = ''
+    #   use nix
+    #   use flake
+    # '';
 
     packages = with pkgs; [
       nomachine-client # remote desktop for work
       firefox
       leetcode-cli
+
+      slack
 
       anki
 
