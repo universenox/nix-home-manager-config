@@ -4,6 +4,7 @@ with config.colorScheme.colors;
   imports = [ ./waybar.nix ];
 
   home.packages = with pkgs; [
+    hyprland # only necessary when not on system...
     hyprpicker # colorpicker
     hyprpaper # wallpapers
     waybar

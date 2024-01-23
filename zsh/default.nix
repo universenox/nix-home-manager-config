@@ -2,7 +2,7 @@
 {
   # prompt
   programs.starship.enable=true;
-  home.file.".config/starship.toml".source = ./starship.toml;
+  home.file.".config/starship.toml".source = inputs.starship-config;
   
   programs.zsh = {
     enable = true;
@@ -11,11 +11,11 @@
     # todo: cdpath seems useful for work? (dir structure)
     
     shellAliases = {
-      b = "source ~/.zshrc";
       nd = "nix develop --command zsh";
     };
     sessionVariables = {
       ZSH_AUTOSUGGEST_STRATEGY = [ "history" ];
+      SHELL="zsh";
     };
     initExtra = ''
       bindkey '^ ' autosuggest-accept

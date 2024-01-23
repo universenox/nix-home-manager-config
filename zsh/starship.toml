@@ -1,14 +1,37 @@
-format = """
-$username\
+format = """$username\
 $hostname\
+$status\
+([${env_var.SECOND}${custom.PARENT}](blue))\
 $directory\
 $git_branch\
 $git_state\
 $git_status\
 $cmd_duration\
-$line_break\
+$nix_shell\
 $python\
+$line_break\
 $character"""
+
+[nix_shell]
+format="[❄️ $name](fg:75)"
+
+[custom.PARENT]
+when='''test $PARENT'''
+command='basename $PARENT'
+format='[$output ](blue)'
+disabled=false
+
+[env_var.SECOND]
+when='''test $SECOND'''
+variable='SECOND'
+format='[⛴ $env_value ](blue)'
+disabled=false
+
+[custom.mako_node]
+when='''git rev-parse --git-dir'''
+command='''git tag | rg "^mko[0-9]+$" | tail -n 1 '''
+format='[$output ](fg:230)'
+
 
 [directory]
 style = "fg:182"
@@ -16,9 +39,9 @@ style = "fg:182"
 [character]
 success_symbol = "[❯](fg:225)"
 error_symbol = "[❯](fg:124)"
-vimcmd_symbol = "[❮](fg:229)"
 
 [git_branch]
+symbol = "🌱"
 format = "[$branch]($style)"
 style = "fg: 217"
 

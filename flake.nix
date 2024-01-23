@@ -12,7 +12,9 @@
     my-zsh.url = path:./zsh;
     my-zsh.inputs.nixpkgs.follows = "nixpkgs";
     my-zsh.inputs.home-manager.follows = "home-manager";
-    
+
+    #hyprland.url = "github:hyprwm/Hyprland";
+
     nix-colors.url = "github:misterio77/nix-colors";
   };
   outputs = { nixpkgs, home-manager, nix-colors, my-zsh, ... }:
@@ -33,7 +35,7 @@
         ];
       };
       # work. 
-      homeConfigurations."work" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."kswanson" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit nix-colors; };
         modules = [ 

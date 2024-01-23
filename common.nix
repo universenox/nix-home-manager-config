@@ -5,7 +5,10 @@
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
 
-  imports = [];
+  imports = [
+    ./kitty
+    ./rofi
+  ];
 
   # https://tinted-theming.github.io/base16-gallery/
   colorScheme = nix-colors.colorSchemes.tokyo-night-storm;
@@ -15,12 +18,11 @@
     keyboard.layout = "us";
 
     shellAliases = {
-      e = "hx";
-      ls = "lsd";
-      cat = "bat --paging=never";
-      catp = "bat --no-paging --plain";
-
+      which="type -a";
+      cat =  "${pkgs.bat}/bin/bat --paging=never";
+      catp = "${pkgs.bat}/bin/bat --no-paging --plain";
       cppshell = let file = ./devShells/cpp; in "nix develop ${file}";
+      ls = "${pkgs.lsd}/bin/lsd";
     };
 
     sessionVariables = {
@@ -80,7 +82,6 @@
     lazygit.enable = true; # cute little cli for viewing git stuff
     less.enable = true;
     zoxide.enable = true;
-    autojump.enable = true;
     git = {
       enable = true;
       difftastic.enable = true;

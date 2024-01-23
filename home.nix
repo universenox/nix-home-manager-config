@@ -1,9 +1,7 @@
 { lib, config, pkgs, nix-colors, ... }:
 {
   imports = [
-    ./kitty
-    ./rofi
-    ./hyprland
+     ./hyprland
   ];
 
   home = {
@@ -28,6 +26,7 @@
       firefox
       leetcode-cli
 
+      zoom-us
       slack
 
       anki

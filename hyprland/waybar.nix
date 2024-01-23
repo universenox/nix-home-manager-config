@@ -82,7 +82,7 @@
     '';
     settings = {
       mainBar = {
-        margin = "8px 10px -2px 10px";
+        margin = "0px 0px -2px 0px";
         layer = "top";
         #position = "left";
 

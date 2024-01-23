@@ -24,6 +24,10 @@
       url = "github:zsh-users/zsh-syntax-highlighting";
       flake = false;
     };
+    starship-config = {
+      url = "path:./starship.toml";
+      flake = false;
+    };
   };
   outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
