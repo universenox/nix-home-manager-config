@@ -26,6 +26,8 @@
       firefox
       leetcode-cli
 
+      android-studio
+
       zoom-us
       slack
 

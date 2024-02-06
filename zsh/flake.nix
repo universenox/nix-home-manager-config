@@ -1,8 +1,8 @@
 {
   description = "My Zsh Home-Manager Config";
-
+  # zplug-* are my zsh plugins.
   inputs = {
-    # list of zsh plugins
+    # hist db
     zplug-spaceship-prompt = { 
       url = "github:spaceship-prompt/spaceship-prompt";
       flake = false;

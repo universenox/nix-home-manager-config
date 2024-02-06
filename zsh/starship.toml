@@ -22,9 +22,8 @@ format='[$output ](blue)'
 disabled=false
 
 [env_var.SECOND]
-when='''test $SECOND'''
 variable='SECOND'
-format='[⛴ $env_value ](blue)'
+format='[👼 $env_value ](blue)'
 disabled=false
 
 [custom.mako_node]

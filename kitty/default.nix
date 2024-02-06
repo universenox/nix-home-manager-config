@@ -5,7 +5,7 @@
   };
   programs.kitty = {
     enable = true;
-    settings = let colors = config.colorScheme.colors; in {
+    settings = let colors = config.colorScheme.palette; in {
       enable_audio_bell = false;
       bell_on_tab = "🔔 ";
       scrollback_lines = 10000;

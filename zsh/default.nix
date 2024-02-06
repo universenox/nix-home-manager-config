@@ -8,8 +8,8 @@
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    # todo: cdpath seems useful for work? (dir structure)
-    
+    syntaxHighlighting.enable = true;
+   
     shellAliases = {
       nd = "nix develop --command zsh";
     };
@@ -19,28 +19,19 @@
     };
     initExtra = ''
       bindkey '^ ' autosuggest-accept
+      # put comment after cmd to help find it in history?
+      setopt interactivecomments
     '';
-    plugins = [
-      {
-        name = "nix-zsh-completions";
-        file = "nix-zsh-completions.plugin.zsh";
-        src = inputs.zplug-nix-zsh-completions;
-      }
-      {
-        name = "fzf-tab";
-        file = "fzf-tab.plugin.zsh";
-        src = inputs.zplug-fzf-tab;       
-      }
-      {
-        name = "nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = inputs.zplug-nix-shell;
-      }
-      {
-        name = "zsh-syntax-highlighting";
-        file = "zsh-syntax-highlighting.plugin.zsh";
-        src = inputs.zplug-zsh-syntax-highlighting;
-      }
+    plugins = let 
+      mkPlugin = name : {
+        name = "${name}";
+        file = "${name}.plugin.zsh";
+        src = inputs."zplug-${name}";
+      }; in [
+      ( mkPlugin "nix-zsh-completions"     )
+      ( mkPlugin "fzf-tab"                 )
+      ( mkPlugin "nix-shell"               )
+      ( mkPlugin "zsh-syntax-highlighting" )
     ];
   };
 }

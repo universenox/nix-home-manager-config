@@ -1,5 +1,5 @@
 { lib, config, pkgs, ... }:
-with config.colorScheme.colors;
+with config.colorScheme.palette;
 {
   imports = [ ./waybar.nix ];
 
@@ -35,7 +35,7 @@ with config.colorScheme.colors;
 
   # to find display, call `xrandr`. glob '*' doesn't work...
   home.file.".config/hypr/hyprpaper.conf".text =
-    let wall = "~/Pictures/Wallpapers/fblue-trainstation.png"; in
+    let wall = "~/Pictures/Wallpapers/coffee2.jpg"; in
     ''
       preload = ${wall}
       wallpaper = eDP-1, ${wall}

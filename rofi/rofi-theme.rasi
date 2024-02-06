@@ -8,7 +8,7 @@
     font:   "Nerd Font 12";
 
     background-color:   transparent;
-    text-color:         @fg0;
+    text-color:         @base05;
 
     margin:     0px;
     padding:    0px;
@@ -20,7 +20,7 @@ window {
     width:          480;
     border-radius:  24px;
     
-    background-color:   @bg0;
+    background-color:   @base01;
 }
 
 mainbox {
@@ -28,8 +28,8 @@ mainbox {
 }
 
 inputbar {
-    background-color:   @bg1;
-    border-color:       @fg2;
+    background-color:   @base01;
+    border-color:       @base04;
 
     border:         2px;
     border-radius:  16px;
@@ -40,19 +40,19 @@ inputbar {
 }
 
 prompt {
-    text-color: @fg1;
+    text-color: @base04;
 }
 
 entry {
     placeholder:        "Search";
-    placeholder-color:  @fg2;
+    placeholder-color:  @base04;
 }
 
 message {
     margin:             12px 0 0;
     border-radius:      16px;
-    border-color:       @fg2;
-    background-color:   @bg1;
+    border-color:       @base0A;
+    background-color:   @base01;
 }
 
 textbox {
@@ -76,11 +76,11 @@ element {
 }
 
 element normal active {
-    text-color: @fg1;
+    text-color: @base0A;
 }
 
 element selected normal, element selected active {
-    background-color:   @bg2;
+    background-color:   @base02;
 }
 
 element-icon {

@@ -1,7 +1,7 @@
 {config, pkgs, ...}: {
   # Copied from johnk1917
   # then slightly modified.
-  programs.waybar = with config.colorScheme.colors; {
+  programs.waybar = with config.colorScheme.palette; {
     enable = true;
     systemd.enable = true;
     style = '' 

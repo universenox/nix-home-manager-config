@@ -8,7 +8,7 @@
     homeDirectory = "/home/kswanson";
 
     sessionVariables = {
-      TERM="xterm-256color";
+      #TERM="xterm-256color";
     };
 
     shellAliases = {
