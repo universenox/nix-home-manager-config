@@ -1,7 +1,8 @@
 { lib, config, pkgs, nix-colors, ... }:
 {
   imports = [
-     ./hyprland
+    ./hyprland
+    ./timers.nix
   ];
 
   home = {
@@ -12,8 +13,7 @@
       # screenshot
       ss = "grim -g \"$(slurp -d)\" - | swappy -f -";
     };
-    sessionVariables = {
-    };
+    sessionVariables = { };
 
     # for nix-direnv
     # file.".env".text = ''
@@ -27,6 +27,8 @@
       leetcode-cli
 
       android-studio
+
+      realvnc-vnc-viewer
 
       zoom-us
       slack

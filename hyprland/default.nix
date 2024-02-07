@@ -22,16 +22,16 @@ with config.colorScheme.palette;
     builtins.readFile (./appearance.conf)
     +
     ''
-  general { 
-    col.active_border = rgba(${base00}ff) rgba(${base05}cc) 45deg 
-    col.inactive_border = rgba(${base08}00)  
-  }
+      general { 
+        col.active_border = rgba(${base00}ff) rgba(${base05}cc) 45deg 
+        col.inactive_border = rgba(${base08}00)  
+      }
 
-  decoration { 
-    col.shadow = rgba(${base0A}ee) 
-  }
+      decoration { 
+        col.shadow = rgba(${base0A}ee) 
+      }
 
-  '';
+    '';
 
   # to find display, call `xrandr`. glob '*' doesn't work...
   home.file.".config/hypr/hyprpaper.conf".text =

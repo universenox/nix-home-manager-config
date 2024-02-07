@@ -3,7 +3,7 @@
   # zplug-* are my zsh plugins.
   inputs = {
     # hist db
-    zplug-spaceship-prompt = { 
+    zplug-spaceship-prompt = {
       url = "github:spaceship-prompt/spaceship-prompt";
       flake = false;
     };
@@ -34,7 +34,8 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       lib = pkgs.lib;
-    in { 
-      homeManagerModules.default = (import ./default.nix { inherit pkgs; inherit inputs;}  );
+    in
+    {
+      homeManagerModules.default = (import ./default.nix { inherit pkgs; inherit inputs; });
     };
 }

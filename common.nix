@@ -1,6 +1,6 @@
 # for stuff to share between work and home.
 { lib, config, pkgs, nix-colors, atuin, helix-base16-themes, ... }:
-let 
+let
   #tokyo-night-storm;
   theme = "gruvbox-material-dark-soft";
 in
@@ -12,23 +12,22 @@ in
   imports = [
     ./kitty
     ./rofi
-    ./timers.nix
   ];
   # https://tinted-theming.github.io/base16-gallery/
-  colorScheme = nix-colors.colorSchemes.${theme}; 
+  colorScheme = nix-colors.colorSchemes.${theme};
 
   services.syncthing = {
-      enable = true;
-      tray.enable = true;
+    enable = true;
+    tray.enable = true;
   };
- 
+
   home = {
     stateVersion = "23.11"; # no touchy
     keyboard.layout = "us";
 
     shellAliases = {
-      which="type -a";
-      cat =  "${pkgs.bat}/bin/bat --paging=never";
+      which = "type -a";
+      cat = "${pkgs.bat}/bin/bat --paging=never";
       catp = "${pkgs.bat}/bin/bat --no-paging --plain";
       cppshell = let file = ./devShells/cpp; in "nix develop ${file}";
       ls = "${pkgs.lsd}/bin/lsd";
@@ -44,9 +43,9 @@ in
     packages = with pkgs; [
       ripgrep
       btop
-      fd     # find alt
-      sd     # sed alt
-      lsd    # ls alt
+      fd # find alt
+      sd # sed alt
+      lsd # ls alt
       xclip
 
       jira-cli-go # looks promising.
@@ -61,14 +60,14 @@ in
       shellcheck
       shfmt
 
-      buku     # bookmarks
-      tokei    # count LoC
+      buku # bookmarks
+      tokei # count LoC
       tealdeer # tldr alt
-      taskwarrior 
+      taskwarrior
       timewarrior
-      
+
       ranger # cli file browser
-      file   # optional dep of ranger
+      file # optional dep of ranger
 
       nixpkgs-fmt
       fastfetch
@@ -82,7 +81,7 @@ in
       fira-code-symbols
       fira-code-nerdfont
     ];
- };
+  };
 
 
   home.file.".config/helix/themes/".source = "${helix-base16-themes}/themes/";
@@ -93,15 +92,15 @@ in
       settings.theme = "base16-${theme}";
 
       settings.editor = {
-        rulers = [80 120];
+        rulers = [ 80 120 ];
       };
-      languages = 
+      languages.language =
         [
           { name = "cpp"; auto-format = true; }
         ];
     };
     bash.enable = true;
-    atuin.enable=true; # cmd history
+    atuin.enable = true; # cmd history
     fzf = {
       enable = true;
       enableZshIntegration = true;
@@ -121,10 +120,11 @@ in
       enable = true;
       difftastic.enable = true;
 
-      extraConfig = { # see man git-config
+      extraConfig = {
+        # see man git-config
         branch = {
           autoSetupMerge = true;
-          autoSetupRebase = "always"; 
+          autoSetupRebase = "always";
           fetch = { prune = true; };
           pull = { rebase = true; };
           rebase = {
@@ -136,7 +136,8 @@ in
             log = true;
           };
         };
-        rerere = { #reuse recorded resolutions
+        rerere = {
+          #reuse recorded resolutions
           enabled = true;
           autoUpdate = true;
         };

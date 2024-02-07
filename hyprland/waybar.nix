@@ -1,4 +1,4 @@
-{config, pkgs, ...}: {
+{ config, pkgs, ... }: {
   # Copied from johnk1917
   # then slightly modified.
   programs.waybar = with config.colorScheme.palette; {
@@ -86,12 +86,12 @@
         layer = "top";
         #position = "left";
 
-        modules-left = ["custom/wmname" "hyprland/workspaces" ];
-        modules-center = [];
-        modules-right = ["battery" "backlight" "pulseaudio" "clock" "network" "tray"];
+        modules-left = [ "custom/wmname" "hyprland/workspaces" ];
+        modules-center = [ ];
+        modules-right = [ "battery" "backlight" "pulseaudio" "clock" "network" "tray" ];
 
-      /* Modules configuration */
-      "hyprland/workspaces" = {
+        /* Modules configuration */
+        "hyprland/workspaces" = {
           active-only = "false";
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
@@ -100,18 +100,18 @@
           format = "{icon}";
           on-click = "activate";
           format-icons = {
-              "1" =  "o";
-              "2" =  "o";
-              "3" =  "o";
-              "4" =  "o";
-              "5" =  "o";
-              "6" =  "o";
-              "7" =  "o";
-              "8" =  "o";
-              "9" =  "o";
-              "10" = "o";
-            };
+            "1" = "o";
+            "2" = "o";
+            "3" = "o";
+            "4" = "o";
+            "5" = "o";
+            "6" = "o";
+            "7" = "o";
+            "8" = "o";
+            "9" = "o";
+            "10" = "o";
           };
+        };
 
         "idle_inhibitor" = {
           format = "{icon}";
@@ -127,27 +127,27 @@
 
         "clock" = {
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-	        format = " {:%H:%M}";
-	        format-alt = " {:%A, %B %d, %Y}";
+          format = " {:%H:%M}";
+          format-alt = " {:%A, %B %d, %Y}";
         };
 
         "backlight" = {
           format = "{icon}{percent}%";
-          format-icons = ["󰃞 " "󰃟 " "󰃠 "];
+          format-icons = [ "󰃞 " "󰃟 " "󰃠 " ];
           on-scroll-up = "light -A 1";
           on-scroll-down = "light -U 1";
         };
         "battery" = {
           states = {
-          warning = "30";
-          critical = "15";
-        };
+            warning = "30";
+            critical = "15";
+          };
           format = "{icon}{capacity}%";
           tooltip-format = "{timeTo} {capacity}%";
           format-charging = "󱐋{capacity}%";
           format-plugged = " ";
           format-alt = "{time} {icon}";
-          format-icons = ["  " "  " "  " "  " "  "];
+          format-icons = [ "  " "  " "  " "  " "  " ];
         };
         "network" = {
           format-wifi = "  {signalStrength}%";
@@ -166,13 +166,13 @@
           format-source-muted = "";
           format-muted = "  {format_source}";
           format-icons = {
-              headphone = " ";
-              hands-free = " ";
-              headset = " ";
-              phone = " ";
-              portable = " ";
-              car = " ";
-              default = [" " " " " "];
+            headphone = " ";
+            hands-free = " ";
+            headset = " ";
+            phone = " ";
+            portable = " ";
+            car = " ";
+            default = [ " " " " " " ];
           };
           tooltip-format = "{desc} {volume}%";
           on-click = "pavucontrol";
