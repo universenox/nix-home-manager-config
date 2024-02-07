@@ -39,43 +39,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1706985585,
-        "narHash": "sha256-ptshv4qXiC6V0GCfpABz88UGGPNwqs5tAxaRUKbk1Qo=",
+        "lastModified": 1707175763,
+        "narHash": "sha256-0MKHC6tQ4KEuM5rui6DjKZ/VNiSANB4E+DJ/+wPS1PU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1ca210648a6ca9b957efde5da957f3de6b1f0c45",
+        "rev": "f99eace7c167b8a6a0871849493b1c613d0f1b80",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "my-zsh": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "starship-config": "starship-config",
-        "zplug-fzf-tab": "zplug-fzf-tab",
-        "zplug-nix-shell": "zplug-nix-shell",
-        "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
-        "zplug-spaceship-prompt": "zplug-spaceship-prompt",
-        "zplug-zsh-syntax-highlighting": "zplug-zsh-syntax-highlighting"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-UC7vWCvFezqwbNcr9/jB3Wz2ulf1tHoNWZaiso9sdn8=",
-        "path": "./zsh",
-        "type": "path"
-      },
-      "original": {
-        "path": "./zsh",
-        "type": "path"
       }
     },
     "nix-colors": {
@@ -99,11 +73,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1706732774,
-        "narHash": "sha256-hqJlyJk4MRpcItGYMF+3uHe8HvxNETWvlGtLuVpqLU0=",
+        "lastModified": 1707092692,
+        "narHash": "sha256-ZbHsm+mGk/izkWtT4xwwqz38fdlwu7nUUKXTOmm4SyE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b8b232ae7b8b144397fdb12d20f592e5e7c1a64d",
+        "rev": "faf912b086576fd1a15fca610166c98d47bc667e",
         "type": "github"
       },
       "original": {
@@ -130,11 +104,11 @@
     },
     "root": {
       "inputs": {
-        "helix-base16-themes": "helix-base16-themes",
         "home-manager": "home-manager",
-        "my-zsh": "my-zsh",
         "nix-colors": "nix-colors",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "theme": "theme",
+        "user-shell": "user-shell"
       }
     },
     "starship-config": {
@@ -147,6 +121,49 @@
       },
       "original": {
         "path": "./starship.toml",
+        "type": "path"
+      }
+    },
+    "theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-wTfu6r0VYc3+EbfbuC/EaKnAKkSeiBVRA0VEl0GmZTA=",
+        "path": "/nix/store/bkkkwpc00hskbaxmzwsld7sirij452ir-source/theme.nix",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/bkkkwpc00hskbaxmzwsld7sirij452ir-source/theme.nix",
+        "type": "path"
+      }
+    },
+    "user-shell": {
+      "inputs": {
+        "helix-base16-themes": "helix-base16-themes",
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "starship-config": "starship-config",
+        "theme": [
+          "theme"
+        ],
+        "zplug-fzf-tab": "zplug-fzf-tab",
+        "zplug-nix-shell": "zplug-nix-shell",
+        "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
+        "zplug-spaceship-prompt": "zplug-spaceship-prompt",
+        "zplug-zsh-syntax-highlighting": "zplug-zsh-syntax-highlighting"
+      },
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-3Na6TQ4SQNsu+Azi42G00YrJ9xviMPbXwqYd8LXSZps=",
+        "path": "user-shell",
+        "type": "path"
+      },
+      "original": {
+        "path": "user-shell",
         "type": "path"
       }
     },

@@ -5,45 +5,57 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    my-zsh.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager.url = "github:nix-community/home-manager";
-    my-zsh.url = path:./zsh;
-    my-zsh.inputs.home-manager.follows = "home-manager";
+    user-shell.url = "path:user-shell";
+    user-shell.inputs.home-manager.follows = "home-manager";
 
     #hyprland.url = "github:hyprwm/Hyprland";
     nix-colors.url = "github:misterio77/nix-colors";
-    helix-base16-themes = {
-      url = "github:tinted-theming/base16-helix";
+
+    theme = {
+      url = "./theme.nix";
       flake = false;
     };
+
+    user-shell.inputs.nixpkgs.follows = "nixpkgs";
+    user-shell.inputs.theme.follows = "theme";
   };
-  outputs = { nixpkgs, home-manager, nix-colors, my-zsh, helix-base16-themes, ... }:
+  outputs = { nixpkgs, home-manager, nix-colors, user-shell, theme, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      # https://tinted-theming.github.io/base16-gallery/
     in
     {
-      homeConfigurations."kim" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."home" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit nix-colors helix-base16-themes; };
+        extraSpecialArgs = { inherit nix-colors theme; };
         modules = [
           nix-colors.homeManagerModules.default
+          user-shell.homeManagerModules.default
           ./nixpkgs-vlc-fix.nix
           ./common.nix
-          ./home.nix
-          my-zsh.homeManagerModules.default
+          ./home-home.nix
         ];
       };
-      # work. 
-      homeConfigurations."kswanson" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."vps" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit nix-colors; };
+        extraSpecialArgs = { inherit nix-colors theme; };
         modules = [
           nix-colors.homeManagerModules.default
+          user-shell.homeManagerModules.default
           ./common.nix
-          ./work-home.nix
-          my-zsh.homeManagerModules.default
+          ./home-vps.nix
+        ];
+      };
+      homeConfigurations."work" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = { inherit nix-colors theme; };
+        modules = [
+          nix-colors.homeManagerModules.default
+          user-shell.homeManagerModules.default
+          ./common.nix
+          ./home-work.nix
         ];
       };
     };

@@ -2,39 +2,40 @@
 {
   imports = [
     ./hyprland
-    ./timers.nix
+    ./taskw-export-timer.nix
+    ./rofi
   ];
+
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
 
   home = {
     username = "kim";
     homeDirectory = "/home/kim";
 
     shellAliases = {
+      hms = "home-manager switch --flake ~/.config/home-manager/#home";
       # screenshot
       ss = "grim -g \"$(slurp -d)\" - | swappy -f -";
     };
+
     sessionVariables = { };
 
-    # for nix-direnv
-    # file.".env".text = ''
-    #   use nix
-    #   use flake
-    # '';
-
     packages = with pkgs; [
-      nomachine-client # remote desktop for work
       firefox
       leetcode-cli
 
       android-studio
-
-      realvnc-vnc-viewer
+      android-file-transfer
 
       zoom-us
       slack
 
-      anki
+      nil # nix lang serv
 
+      anki
       pass
       discord
       qbittorrent
@@ -49,18 +50,16 @@
       swappy
       slurp
       grim
-
-      # music
-      tauon
-
-      noto-fonts-cjk # japanese
-
-      gh # cli github
-
       wl-clipboard # for helix yank to system clipboard
-      wayshot # todo: would like alternative.
+
+      tauon # music
 
       handlr # a better xdg-open?
+
+      nomachine-client # remote desktop for work
+      realvnc-vnc-viewer # vps. but tbh prefer ssh.
+
+      noto-fonts-cjk # japanese
     ];
   };
   programs = {

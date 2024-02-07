@@ -1,58 +1,19 @@
-# for stuff to share between work and home.
-{ lib, config, pkgs, nix-colors, atuin, helix-base16-themes, ... }:
-let
-  #tokyo-night-storm;
-  theme = "gruvbox-material-dark-soft";
-in
+# common across all configurations
+{ lib, config, pkgs, nix-colors, atuin, theme, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
+  colorScheme = let th = (import theme).theme; in nix-colors.colorSchemes.${th};
+  imports = [ ./kitty ];
 
-  imports = [
-    ./kitty
-    ./rofi
-  ];
-  # https://tinted-theming.github.io/base16-gallery/
-  colorScheme = nix-colors.colorSchemes.${theme};
-
-  services.syncthing = {
-    enable = true;
-    tray.enable = true;
-  };
 
   home = {
     stateVersion = "23.11"; # no touchy
     keyboard.layout = "us";
 
-    shellAliases = {
-      which = "type -a";
-      cat = "${pkgs.bat}/bin/bat --paging=never";
-      catp = "${pkgs.bat}/bin/bat --no-paging --plain";
-      cppshell = let file = ./devShells/cpp; in "nix develop ${file}";
-      ls = "${pkgs.lsd}/bin/lsd";
-
-      # local_ips = ''${pkgs.nmap}/bin/nmap -sL "192.168.66.0.*" | grep \(1"''
-    };
-
-    sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
-    };
-
     packages = with pkgs; [
-      ripgrep
-      btop
-      fd # find alt
-      sd # sed alt
-      lsd # ls alt
       xclip
-
-      jira-cli-go # looks promising.
-
-      (python311.withPackages (p: with p; [
-        bugwarrior
-      ]))
 
       tree
       nix-tree
@@ -60,9 +21,10 @@ in
       shellcheck
       shfmt
 
-      buku # bookmarks
       tokei # count LoC
       tealdeer # tldr alt
+
+      buku # bookmarks
       taskwarrior
       timewarrior
 
@@ -71,55 +33,15 @@ in
 
       nixpkgs-fmt
       fastfetch
-
       # fonts
-      noto-fonts
-      noto-fonts-emoji
-
-      # fira needed for emojis on `lsd`
-      fira-code
-      fira-code-symbols
-      fira-code-nerdfont
+      # noto-fonts
+      # noto-fonts-emoji
     ];
   };
 
-
-  home.file.".config/helix/themes/".source = "${helix-base16-themes}/themes/";
   programs = {
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      settings.theme = "base16-${theme}";
-
-      settings.editor = {
-        rulers = [ 80 120 ];
-      };
-      languages.language =
-        [
-          { name = "cpp"; auto-format = true; }
-        ];
-    };
-    bash.enable = true;
-    atuin.enable = true; # cmd history
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-    bat = {
-      enable = true;
-    };
-    nix-index.enable = true;
-    lazygit.enable = true; # cute little cli for viewing git stuff
-    less.enable = true;
-    zoxide.enable = true;
     git = {
       enable = true;
-      difftastic.enable = true;
-
       extraConfig = {
         # see man git-config
         branch = {
@@ -137,7 +59,7 @@ in
           };
         };
         rerere = {
-          #reuse recorded resolutions
+          # reuse recorded resolutions
           enabled = true;
           autoUpdate = true;
         };

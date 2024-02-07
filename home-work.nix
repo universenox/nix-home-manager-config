@@ -15,7 +15,7 @@
       regen_clangdb = "ninja -C build-clang -t compdb > compile_commands.json";
       kitty = "nix run github:guibou/nixGL#nixGLIntel -- kitty";
       env = "/bin/env";
-
+      hms = "home-manager switch --flake ~/.config/home-manager/#work";
 
       # if you wish to restore to mako env (and break nix)
       # remove ~/.bashrc and copy over the /srg/pro/env/bashrc one.
@@ -40,6 +40,11 @@
       python312
       ccache
       socat
+
+      jira-cli-go # looks promising.
+      (python311.withPackages (p: with p; [
+        bugwarrior
+      ]))
     ];
 
     # Essentially provides the "overrides" and hackery we need to work.
