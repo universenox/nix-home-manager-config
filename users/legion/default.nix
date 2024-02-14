@@ -1,9 +1,11 @@
-{ lib, config, pkgs, nix-colors, ... }:
+{ pkgs, color, ... }@inputs:
 {
   imports = [
-    ./hyprland
+    ../../common.nix
+    ../../applications/hyprland
+    ../../applications/rofi
+    ../../applications/git
     ./taskw-export-timer.nix
-    ./rofi
   ];
 
   services.syncthing = {
@@ -24,27 +26,9 @@
     sessionVariables = { };
 
     packages = with pkgs; [
-      firefox
-      leetcode-cli
-
-      android-studio
-      android-file-transfer
-
-      zoom-us
-      slack
-
-      nil # nix lang serv
-
-      anki
       pass
-      discord
-      qbittorrent
-      obs-studio
-      pandoc
-      vlc
       neofetch
-      texliveFull # this is pretty big...
-      gimp
+      handlr # a better xdg-open?
 
       # wayland screenshot... 
       swappy
@@ -52,16 +36,37 @@
       grim
       wl-clipboard # for helix yank to system clipboard
 
-      tauon # music
+      nil # nix lang serv
+      vscode-langservers-extracted # html css json eslint
+      nginx # testing
+      hugo
 
-      handlr # a better xdg-open?
+      firefox
+      leetcode-cli
+
+      zoom-us
+      slack
+      element-desktop
+
+      android-studio
+      android-file-transfer
+
+      anki
+      qbittorrent
+      vlc
+      tauon # music
+      obs-studio
+      pandoc
+      discord
+      texliveFull # this is pretty big...
+      gimp
+      inkscape
 
       nomachine-client # remote desktop for work
-      realvnc-vnc-viewer # vps. but tbh prefer ssh.
-
       noto-fonts-cjk # japanese
     ];
   };
+
   programs = {
     git = {
       userName = "Kimberly Swanson";

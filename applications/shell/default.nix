@@ -1,15 +1,8 @@
-# All things that I consider essential to my user shell, including 
-# CLI utils. Basically the minimal set that I want to share
-# across all my envs.
-#
-# TODO: some of the utils may use a bit of disk space. VPS disk space is expensive.
-# maybe move some of them out as needed.
-{ pkgs, inputs, helix-base16-themes, theme, ... }:
+{ pkgs, inputs, ... }:
 {
   # prompt
   programs.starship.enable = true;
   home.file.".config/starship.toml".source = ./starship.toml;
-  home.file.".config/helix/themes/".source = "${helix-base16-themes}/themes/";
 
   home = {
     shellAliases = {
@@ -20,52 +13,14 @@
       ls = "${pkgs.lsd}/bin/lsd";
     };
 
-    packages = with pkgs; [
-      ripgrep
-      btop
-      fd # find alt
-      sd # sed alt
-      lsd # ls alt
-
-      shellcheck
-      shfmt
-
-      # fira needed for emojis on `lsd`
-      fira-code
-      fira-code-symbols
-      fira-code-nerdfont
-    ];
-
     sessionVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
     };
   };
   programs = {
-    helix = {
-      enable = true;
-      defaultEditor = true;
-      settings.theme = let th = (import theme).theme; in "base16-${th}";
-
-      settings.editor = {
-        rulers = [ 80 120 ];
-      };
-      languages.language =
-        [
-          { name = "cpp"; auto-format = true; }
-        ];
-    };
+    helix.enable = true;
     bash.enable = true;
-    atuin.enable = true; # cmd history
-    fzf.enable = true;
-    bat.enable = true;
-    nix-index.enable = true;
-    less.enable = true;
-    zoxide.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
     zsh = {
       enable = true;
       enableCompletion = true;

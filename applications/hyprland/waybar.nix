@@ -1,10 +1,10 @@
-{ config, pkgs, ... }: {
+{ config, ... }: {
   # Copied from johnk1917
   # then slightly modified.
-  programs.waybar = with config.colorScheme.palette; {
+  programs.waybar = {
     enable = true;
     systemd.enable = true;
-    style = '' 
+    style = with config.colorScheme.palette; '' 
         * {
           border: none;
           font-family: JetBrainsMono Nerd Font, sans-serif;

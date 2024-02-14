@@ -1,11 +1,19 @@
 # common across all configurations
-{ lib, config, pkgs, nix-colors, atuin, theme, ... }:
+{ pkgs, nix-colors, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
-  colorScheme = let th = (import theme).theme; in nix-colors.colorSchemes.${th};
-  imports = [ ./kitty ];
+
+  imports = [
+    ./applications/kitty
+    ./applications/git
+  ];
+  #### colors ####
+  colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-soft;
+  programs.helix.settings.theme = "base16-gruvbox-material-dark-soft";
+  programs.kitty.theme = "Gruvbox Material Dark Soft";
+  ###############
 
 
   home = {
@@ -13,13 +21,23 @@
     keyboard.layout = "us";
 
     packages = with pkgs; [
-      xclip
+      ripgrep
+      btop
+      fd # find alt
+      sd # sed alt
+      lsd # ls alt
+      choose # cut alt
+      gdu # du alt
+
+      lnav # log navigator, looks promising.
+
+      shellcheck
+      shfmt
 
       tree
       nix-tree
 
-      shellcheck
-      shfmt
+      xclip
 
       tokei # count LoC
       tealdeer # tldr alt
@@ -33,38 +51,24 @@
 
       nixpkgs-fmt
       fastfetch
-      # fonts
-      # noto-fonts
-      # noto-fonts-emoji
+
+      # fira needed for emojis on `lsd`
+      fira-code
+      fira-code-symbols
+      fira-code-nerdfont
     ];
   };
 
   programs = {
-    git = {
+    atuin.enable = true; # cmd history
+    fzf.enable = true;
+    bat.enable = true;
+    nix-index.enable = true; # nix-locate <cmd> to see what provides it
+    less.enable = true;
+    zoxide.enable = true;
+    direnv = {
       enable = true;
-      extraConfig = {
-        # see man git-config
-        branch = {
-          autoSetupMerge = true;
-          autoSetupRebase = "always";
-          fetch = { prune = true; };
-          pull = { rebase = true; };
-          rebase = {
-            autoSquash = true;
-            autoStash = true; # before rebase, then applies after.
-          };
-          merge = {
-            ff = "only";
-            log = true;
-          };
-        };
-        rerere = {
-          # reuse recorded resolutions
-          enabled = true;
-          autoUpdate = true;
-        };
-      };
-      ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" ];
+      nix-direnv.enable = true;
     };
   };
 }

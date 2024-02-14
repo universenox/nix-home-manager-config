@@ -28,19 +28,14 @@
       url = "path:./starship.toml";
       flake = false;
     };
-    helix-base16-themes = {
-      url = "github:tinted-theming/base16-helix";
-      flake = false;
-    };
   };
-  outputs = inputs@{ nixpkgs, home-manager, helix-base16-themes, theme, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      lib = pkgs.lib;
     in
     {
       homeManagerModules.default =
-        (import ./default.nix { inherit pkgs inputs helix-base16-themes theme; });
+        (import ./default.nix { inherit pkgs inputs; });
     };
 }

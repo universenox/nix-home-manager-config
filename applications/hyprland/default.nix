@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ config, pkgs, ... }:
 with config.colorScheme.palette;
 {
   imports = [ ./waybar.nix ];

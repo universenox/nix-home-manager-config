@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.shellAliases = {
     run = "rofi -show drun";

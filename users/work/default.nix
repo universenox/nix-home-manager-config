@@ -1,4 +1,4 @@
-{ lib, config, pkgs, nix-colors, ... }:
+{ lib, config, pkgs, ... }:
 {
   imports = [
   ];
@@ -37,22 +37,13 @@
       ninja
       doxygen
       cmake-format
-      python312
       ccache
       socat
 
-      jira-cli-go # looks promising.
       (python311.withPackages (p: with p; [
         bugwarrior
       ]))
     ];
-
-    # Essentially provides the "overrides" and hackery we need to work.
-    # TODO: This is impure!
-    file.".mako-env" = {
-      source = /local/kswanson/menv;
-      recursive = true;
-    };
   };
   programs =
     let
