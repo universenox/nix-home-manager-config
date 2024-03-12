@@ -12,6 +12,17 @@
     tray.enable = true;
   };
 
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "kimserv" = {
+        host = "kimserv 185.193.158.96";
+        hostname = "185.193.158.96";
+        user = "kim";
+      };
+    };
+  };
+
   programs.zsh.initExtra =
     ''
       function ylm () { ${pkgs.yt-dlp}/bin/yt-dlp -f 139 $1 } 
