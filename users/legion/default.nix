@@ -2,7 +2,6 @@
 {
   imports = [
     ../../common.nix
-    ../../applications/hyprland
     ../../applications/rofi
     ../../applications/git
     ./taskw-export-timer.nix
@@ -13,6 +12,11 @@
     tray.enable = true;
   };
 
+  programs.zsh.initExtra =
+    ''
+      function ylm () { ${pkgs.yt-dlp}/bin/yt-dlp -f 139 $1 } 
+    '';
+
   home = {
     username = "kim";
     homeDirectory = "/home/kim";
@@ -22,9 +26,6 @@
       # screenshot
       ss = "grim -g \"$(slurp -d)\" - | swappy -f -";
     };
-
-    sessionVariables = { };
-
     packages = with pkgs; [
       pass
       neofetch
@@ -54,11 +55,13 @@
       anki
       qbittorrent
       vlc
+      yt-dlp
       tauon # music
       obs-studio
       pandoc
       discord
-      texliveFull # this is pretty big...
+      libreoffice
+      texliveFull
       gimp
       inkscape
 
@@ -75,10 +78,11 @@
   };
 
   # japanese
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
-  };
+  # TODO.
+  # i18n.inputMethod = {
+  #   enabled = "fcitx5";
+  #   fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
+  # };
 
   services.mpd = {
     enable = true;

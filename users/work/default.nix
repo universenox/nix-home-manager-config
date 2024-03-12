@@ -1,19 +1,16 @@
 { lib, config, pkgs, ... }:
 {
   imports = [
+    ../../common.nix
   ];
+  config.isWork = true;
 
   home = {
     username = "kswanson";
     homeDirectory = "/home/kswanson";
 
-    sessionVariables = {
-      #TERM="xterm-256color";
-    };
-
     shellAliases = {
       regen_clangdb = "ninja -C build-clang -t compdb > compile_commands.json";
-      kitty = "nix run github:guibou/nixGL#nixGLIntel -- kitty";
       env = "/bin/env";
       hms = "home-manager switch --flake ~/.config/home-manager/#work";
 

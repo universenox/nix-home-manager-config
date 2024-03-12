@@ -3,6 +3,7 @@
   home.sessionVariables = {
     GLFW_IM_MODULE = "ibus"; # enable working with fcitx5 switching JP/EN keyb
   };
+
   programs.kitty = with config.colorScheme.palette; {
     enable = true;
     settings = {

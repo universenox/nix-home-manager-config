@@ -28,6 +28,10 @@
       lsd # ls alt
       choose # cut alt
       gdu # du alt
+      jq # json
+      socat
+      openssl
+      mkpasswd
 
       lnav # log navigator, looks promising.
 
@@ -51,6 +55,7 @@
 
       nixpkgs-fmt
       fastfetch
+      hack-font
 
       # fira needed for emojis on `lsd`
       fira-code

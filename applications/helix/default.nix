@@ -1,11 +1,6 @@
 { themesDir, ... }:
 {
   home.file.".config/helix/themes/".source = themesDir;
-  home.file.".config/helix/.clang-format".text = ''
-    ---
-    BasedOnStyle: Chromium
-    ...
-  '';
   home.file.".config/helix/languages.toml".text = ''
     use-grammars = { only = [ "cpp" ] }
 
@@ -16,7 +11,7 @@
     [[language]]
     name = "cpp" 
     auto-format = true
-    formatter = { command = "clang-format", args = [ "--style=~/.config/helix/.clang-format" ]}
+    formatter = { command = "clang-format", args = []}
     language-servers = [ { name = "clangd" } ]
   '';
 

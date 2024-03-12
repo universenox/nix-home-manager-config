@@ -14,8 +14,6 @@
 
     packages = with pkgs; [
       pass
-      nettools
-      gnupg
 
       hugo
       nginx
