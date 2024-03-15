@@ -332,7 +332,6 @@
         "home-manager": "home-manager_3",
         "nixpkgs": "nixpkgs_6",
         "starship-config": "starship-config",
-        "zplug-colored-man-pages": "zplug-colored-man-pages",
         "zplug-fzf-tab": "zplug-fzf-tab",
         "zplug-nix-shell": "zplug-nix-shell",
         "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
@@ -341,7 +340,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-yjJA+GLkC3XMkPzDGVCnAGCwisl+948Ap6MpF2SYX90=",
+        "narHash": "sha256-sYfDRYM7TDsjrFG/32pUCLwD1Ec/xJc3epQMmeIywuA=",
         "path": "applications/shell",
         "type": "path"
       },
@@ -375,24 +374,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "zplug-colored-man-pages": {
-      "flake": false,
-      "locked": {
-        "dir": "plugins/colored-man-pages",
-        "lastModified": 1710432459,
-        "narHash": "sha256-uwdvIWeICOyx+l/hEtQeEvhih1Pj89WwjA7PZH2xaMc=",
-        "owner": "ohmyzsh",
-        "repo": "ohmyzsh",
-        "rev": "c8ba08581dff43c18c1b0d9e7312ca32e6d97124",
-        "type": "github"
-      },
-      "original": {
-        "dir": "plugins/colored-man-pages",
-        "owner": "ohmyzsh",
-        "repo": "ohmyzsh",
         "type": "github"
       }
     },

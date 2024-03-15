@@ -37,14 +37,14 @@
       cursor_blink_interval    = "0.7";
       cursor_stop_blinking_after= "15.0";
       
-      enable_audio_bell= false;
-      visual_bell_duration= "0.0";
-      bell_on_tab = "🔔 ";
+      enable_audio_bell    = false;
+      visual_bell_duration = "0.0";
+      bell_on_tab          = "🔔 ";
       
       # Characters considered part of a word when double clicking.
-      select_by_word_characters= '':@-./";"_~?&=%+#'';
-      mouse_hide_wait= "0.0";
-      enabled_layouts= "*";
+      select_by_word_characters = '':@-./";"_~?&=%+#'';
+      mouse_hide_wait           = "0.0";
+      enabled_layouts           = "*";
       
       remember_window_size  = "no";
       initial_window_width  = "640";
@@ -54,18 +54,20 @@
       input_delay= "3";
       
       # $TERM
-      term = "xterm-kitty";
-      window_border_width= "0";
-      window_margin_width= "15";
+      term               = "xterm-kitty";
+      window_border_width= "5";
+      window_margin_width= "0";
 
-      scrollback_lines = "10000";
-      wheel_scroll_multiplier= "5.0";
-      click_interval= "0.5";
+      scrollback_lines        = "10000";
+      wheel_scroll_multiplier = "5.0";
+      click_interval          = "0.5";
 
-      open_url_modifiers= "ctrl+shift";
-      open_url_with= "default";
+      open_url_modifiers      = "ctrl+shift";
+      open_url_with           = "default";
 
-      hide_window_decorations = "titlebar-only";
+      confirm_os_window_close = true;
+
+      #hide_window_decorations = "titlebar-only";
     };
 
     keybindings = {
@@ -91,8 +93,6 @@
       "ctrl+shift+h"          = "show_scrollback";
 
       # Window management
-      "super+n" = "new_os_window";
-      "super+w" = "close_window";
       "ctrl+shift+enter" = "new_window";
       "ctrl+shift+]" = "next_window";
       "ctrl+shift+[" = "previous_window";
