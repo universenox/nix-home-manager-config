@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, home-id, ... }:
 {
   home.packages = with pkgs; [ delta ];
   programs.git = {
@@ -13,7 +13,7 @@
       core.untrackedCache = true;
       core.fsmonitor = true;
       maintenance = {
-        schedule = if (config ? isWork || false) then "hourly" else "weekly";
+        schedule = if (home-id == "work") then "hourly" else "weekly";
       };
       fetch.writeCommitGraph = true;
       column.ui.auto = "auto";
@@ -44,6 +44,6 @@
       interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
       delta.navigate = true;
     };
-    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" ];
+    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/"];
   };
 }

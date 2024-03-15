@@ -21,43 +21,43 @@
     };
 
     packages = with pkgs; [
+      lnav     # log navigator, amazing.
       ripgrep
-      fd # find alt
-      sd # sed alt
-      lsd # ls alt
-      choose # cut alt
-      gdu # du alt
-      jq # json
-      socat
-      openssl
-      mkpasswd
-      btop
-      lnav # log navigator, looks promising.
+      fd       # find alt
       tree
-      lazygit
+      sd       # sed alt
+      lsd      # ls alt
+      choose   # cut alt
 
+      timewarrior
+      taskwarrior
+      buku     # bookmarks
+      lazygit
+      btop
+
+      ranger   # cli file browser
+      file     # optional dep of ranger
+      fastfetch
+
+      nixpkgs-fmt
+      nix-tree
       shellcheck
       shfmt
 
-      tokei # count LoC
+      tokei    # count LoC
       tealdeer # tldr alt
 
-      buku # bookmarks
-      taskwarrior
-      timewarrior
-
-      ranger # cli file browser
-      file # optional dep of ranger
-      nixpkgs-fmt
-      nix-tree
-
-      fastfetch
+      gdu      # du alt
+      jq       # json
+      openssl
+      socat  
+      ascii    # ascii table
     ];
   };
   programs = {
     atuin.enable = true; # cmd history
     fzf.enable = true;
-    bat.enable = true;
+    bat.enable = true;    
     nix-index.enable = true; # nix-locate <cmd> to see what provides it
     less.enable = true;
     zoxide.enable = true;

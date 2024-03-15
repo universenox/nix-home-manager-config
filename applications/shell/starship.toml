@@ -28,10 +28,6 @@ disabled=false
 format = "$symbol "
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
-vimcmd_visual_symbol = "[❮](bold yellow)"
-vimcmd_replace_symbol = "[❮](bold purple)"
-vimcmd_replace_one_symbol = "[❮](bold purple)"
 disabled = false
 
 [cmd_duration]
@@ -64,7 +60,7 @@ fish_style_pwd_dir_length = 0
 use_logical_path = true
 format = "[$path]($style)[$read_only]($read_only_style) "
 repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
-style = "cyan bold"
+style = "cyan"
 disabled = false
 read_only = "🔒"
 read_only_style = "red"
@@ -128,7 +124,7 @@ disabled = false
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
-style = "red bold"
+style = "red"
 stashed = '\$'
 ahead = "⇡"
 behind = "⇣"

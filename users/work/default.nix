@@ -3,7 +3,6 @@
   imports = [
     ../../common.nix
   ];
-  config.isWork = true;
 
   home = {
     username = "kswanson";
@@ -35,11 +34,11 @@
       doxygen
       cmake-format
       ccache
-      socat
 
-      (python311.withPackages (p: with p; [
-        bugwarrior
-      ]))
+      # perms, never....
+      # (python311.withPackages (p: with p; [
+      #   bugwarrior
+      # ]))
     ];
   };
   programs =

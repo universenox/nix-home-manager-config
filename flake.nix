@@ -19,16 +19,16 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      mkHome = name: {
-        name = "${name}";
+      mkHome = home-id: {
+        name = "${home-id}";
         value = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit nix-colors; };
+          extraSpecialArgs = { inherit nix-colors; inherit home-id; };
           modules = [
             nix-colors.homeManagerModules.default
             shell.homeManagerModules.default
             helix.homeManagerModules.default
-            ./users/${name}
+            ./users/${home-id}
           ];
         };
       };
