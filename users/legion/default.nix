@@ -66,6 +66,7 @@
       anki
       qbittorrent
       vlc
+      mpv # better!?
       yt-dlp
       tauon # music
       obs-studio

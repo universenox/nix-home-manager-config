@@ -65,8 +65,7 @@
       open_url_modifiers      = "ctrl+shift";
       open_url_with           = "default";
 
-      confirm_os_window_close = true;
-
+      confirm_os_window_close = "1";
       #hide_window_decorations = "titlebar-only";
     };
 

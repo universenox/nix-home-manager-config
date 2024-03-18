@@ -67,6 +67,12 @@
     };
     helix.enable = true;
     bash.enable = true;
+    tmux = {
+      enable = true;
+      keyMode = "vi";
+      mouse = true;
+      tmuxinator.enable = true; # should try it out.
+    };
     zsh = {
       enable = true;
       enableCompletion = true;
