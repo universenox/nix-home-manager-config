@@ -13,6 +13,8 @@
       catp = "${pkgs.bat}/bin/bat --no-paging --plain";
       cppshell = let file = ./devShells/cpp; in "nix develop ${file}";
       ls = "${pkgs.lsd}/bin/lsd";
+      o = "xdg-open";
+      tmux="TERM=screen-256color-bce tmux"; # destroys color otherwise
     };
 
     sessionVariables = {
@@ -56,7 +58,10 @@
   };
   programs = {
     atuin.enable = true; # cmd history
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      tmux.enableShellIntegration=true;
+    };
     bat.enable = true;    
     nix-index.enable = true; # nix-locate <cmd> to see what provides it
     less.enable = true;
@@ -71,16 +76,24 @@
       enable = true;
       keyMode = "vi";
       mouse = true;
-      tmuxinator.enable = true; # should try it out.
+      tmuxinator.enable = true; # sessions
+
+      extraConfig = ''
+      set -sg escape-time 0
+      '';
+      #set-option -sa terminal-overrides ",xterm-kitty:RGB"
+      #set -g default-terminal "screen-256color"
     };
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
       shellAliases = {
         nd = "nix develop --command zsh";
+        la = "ls -a";
+        cdr="cd $(git rev-parse --show-toplevel)";
       };
       sessionVariables = {
         ZSH_AUTOSUGGEST_STRATEGY = [ "history" ];
@@ -90,6 +103,28 @@
         bindkey '^ ' autosuggest-accept
         # put comment after cmd to help find it in history?
         setopt interactivecomments
+
+        # functions
+        function cl() {
+          cd $1 && la
+        }
+        function mkcd() {
+          test -d "$1" && echo "directory $1 already existed.  Entering it..."
+          test -d "$1" || mkdir -p "$1"
+          test -d "$1" && cd "$1"
+        }
+        function cu() {
+          if [ $# -eq 0 ]; then
+              ascend=1;
+          else
+              ascend=$1;
+          fi
+          local path=""
+          for ((i=1;i<=$ascend;i++)); do
+              path="../$path"
+          done
+          cd "$path"
+        }
       '';
       plugins =
         let

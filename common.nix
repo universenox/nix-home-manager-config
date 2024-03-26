@@ -26,6 +26,7 @@
       fira-code-symbols
       fira-code-nerdfont
 
+      vscode # apparently has a great MR-resolver / git utils; must check out.
       xclip
     ];
   };

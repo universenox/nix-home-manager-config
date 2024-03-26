@@ -38,9 +38,12 @@
       ss = "grim -g \"$(slurp -d)\" - | swappy -f -";
     };
     packages = with pkgs; [
+      poetry
       pass
       neofetch
       handlr # a better xdg-open?
+
+      octaveFull
 
       # wayland screenshot... 
       swappy

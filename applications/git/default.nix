@@ -5,7 +5,12 @@
     enable = true;
     aliases = {
       co = "checkout";
+      cm = "commit";
       staash = "stash --all";
+      s = "status";
+      a = "add -A;s";
+      wip = ''cm -m "WIP"'';
+      d = ''diff'';
     };
 
     # see man git-config

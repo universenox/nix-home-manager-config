@@ -7,7 +7,8 @@
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
-      # populate packages here.
+      # populate packages here...
+      # actually, I prefer poetry!?
       pythonEnv = pkgs.python311.withPackages (p: with p; [ ]);
     in
     with pkgs;{

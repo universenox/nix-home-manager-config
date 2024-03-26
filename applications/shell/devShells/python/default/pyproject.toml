@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "default"
+version = "0.1.0"
+description = ""
+authors = ["Kimberly Swanson <khswanson24@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+supernotelib = "^0.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
