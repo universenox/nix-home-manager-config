@@ -23,20 +23,10 @@
     };
   };
 
-  programs.zsh.initExtra =
-    ''
-      function ylm () { ${pkgs.yt-dlp}/bin/yt-dlp -f 139 $1 } 
-    '';
-
   home = {
     username = "kim";
     homeDirectory = "/home/kim";
 
-    shellAliases = {
-      hms = "home-manager switch --flake ~/.config/home-manager/#home";
-      # screenshot
-      ss = "grim -g \"$(slurp -d)\" - | swappy -f -";
-    };
     packages = with pkgs; [
       poetry
       pass

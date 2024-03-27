@@ -340,7 +340,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-OtOga+0FISzDaS+zQwUHI4nvYutZ+tRvN/zBXv51/ew=",
+        "narHash": "sha256-VRBVaQVGV4JwmLWtSLHHNc0r33PAt1qtWQSE5FEa3rw=",
         "path": "applications/shell",
         "type": "path"
       },

@@ -1,44 +1,35 @@
 { pkgs, inputs, ... }:
 {
   # this for "shell" also includes the very many cli utils I like c:
+  imports = [ ./shell_aliases_fns.nix ];
 
   # prompt
   programs.starship.enable = true;
   home.file.".config/starship.toml".source = ./starship.toml;
 
   home = {
-    shellAliases = {
-      which = "type -a";
-      cat = "${pkgs.bat}/bin/bat --paging=never";
-      catp = "${pkgs.bat}/bin/bat --no-paging --plain";
-      cppshell = let file = ./devShells/cpp; in "nix develop ${file}";
-      ls = "${pkgs.lsd}/bin/lsd";
-      o = "xdg-open";
-      tmux="TERM=screen-256color-bce tmux"; # destroys color otherwise
-    };
-
     sessionVariables = {
       EDITOR = "hx";
       VISUAL = "hx";
     };
 
     packages = with pkgs; [
-      lnav     # log navigator, amazing.
+      lnav # log navigator, amazing.
       ripgrep
-      fd       # find alt
+      #fd       # find alt
       tree
-      sd       # sed alt
-      lsd      # ls alt
-      choose   # cut alt
+      sd # sed alt
+      lsd # ls alt
+      choose # cut alt
 
       timewarrior
       taskwarrior
-      buku     # bookmarks
+      buku # bookmarks
       lazygit
       btop
 
-      ranger   # cli file browser
-      file     # optional dep of ranger
+      ranger # cli file browser
+      file # optional dep of ranger
       fastfetch
 
       nixpkgs-fmt
@@ -46,23 +37,23 @@
       shellcheck
       shfmt
 
-      tokei    # count LoC
+      tokei # count LoC
       tealdeer # tldr alt
 
-      gdu      # du alt
-      jq       # json
+      gdu # du alt
+      jq # json
       openssl
-      socat  
-      ascii    # ascii table
+      socat
+      ascii # ascii table
     ];
   };
   programs = {
     atuin.enable = true; # cmd history
     fzf = {
       enable = true;
-      tmux.enableShellIntegration=true;
+      tmux.enableShellIntegration = true;
     };
-    bat.enable = true;    
+    bat.enable = true;
     nix-index.enable = true; # nix-locate <cmd> to see what provides it
     less.enable = true;
     zoxide.enable = true;
@@ -77,12 +68,10 @@
       keyMode = "vi";
       mouse = true;
       tmuxinator.enable = true; # sessions
-
-      extraConfig = ''
-      set -sg escape-time 0
-      '';
-      #set-option -sa terminal-overrides ",xterm-kitty:RGB"
-      #set -g default-terminal "screen-256color"
+      escapeTime = 0;
+      terminal = "xterm-256color";
+      shell = "${pkgs.zsh}/bin/zsh";
+      extraConfig = "";
     };
     zsh = {
       enable = true;
@@ -90,41 +79,32 @@
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 
-      shellAliases = {
-        nd = "nix develop --command zsh";
-        la = "ls -a";
-        cdr="cd $(git rev-parse --show-toplevel)";
-      };
       sessionVariables = {
-        ZSH_AUTOSUGGEST_STRATEGY = [ "history" ];
+        ZSH_AUTOSUGGEST_STRATEGY = [ "history" "completion" ];
         SHELL = "zsh";
       };
+
       initExtra = ''
         bindkey '^ ' autosuggest-accept
         # put comment after cmd to help find it in history?
         setopt interactivecomments
 
-        # functions
-        function cl() {
-          cd $1 && la
-        }
-        function mkcd() {
-          test -d "$1" && echo "directory $1 already existed.  Entering it..."
-          test -d "$1" || mkdir -p "$1"
-          test -d "$1" && cd "$1"
-        }
-        function cu() {
-          if [ $# -eq 0 ]; then
-              ascend=1;
-          else
-              ascend=$1;
-          fi
-          local path=""
-          for ((i=1;i<=$ascend;i++)); do
-              path="../$path"
-          done
-          cd "$path"
-        }
+        ###
+        # suggestions from fzf-tab  
+        ###
+        # disable sort when completing `git checkout`
+        zstyle ':completion:*:git-checkout:*' sort false
+        # set descriptions format to enable group support
+        # NOTE: don't use escape sequences here, fzf-tab will ignore them
+        zstyle ':completion:*:descriptions' format '[%d]'
+        # set list-colors to enable filename colorizing
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+        zstyle ':completion:*' menu no
+        # preview directory's content with lsd when completing cd
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
+        # switch group using `<` and `>`
+        zstyle ':fzf-tab:*' switch-group '<' '>'      
       '';
       plugins =
         let

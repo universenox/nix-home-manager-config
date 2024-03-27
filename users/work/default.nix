@@ -11,7 +11,6 @@
     shellAliases = {
       regen_clangdb = "ninja -C build-clang -t compdb > compile_commands.json";
       env = "/bin/env";
-      hms = "home-manager switch --flake ~/.config/home-manager/#work";
 
       # if you wish to restore to mako env (and break nix)
       # remove ~/.bashrc and copy over the /srg/pro/env/bashrc one.

@@ -8,10 +8,6 @@
     username = "kim";
     homeDirectory = "/home/kim";
 
-    shellAliases = {
-      hms = "home-manager switch --flake ~/.config/home-manager/#vps";
-    };
-
     packages = with pkgs; [
       pass
 
