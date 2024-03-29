@@ -9,7 +9,45 @@
     in
     with pkgs;{
       devShells.x86_64-linux.default = mkShell {
-        packages = [ clang_17 clang-tools_17 gdb valgrind kcachegrind gnumake cmake ninja doxygen cmake-format cmakeCurses python312 ccache ];
+        name = "cppshell";
+        packages = [ 
+          cmake
+          bear
+
+          boost183
+
+          clang-tools_17
+          llvmPackages_17.clang
+          llvmPackages_17.clang-manpages
+
+          llvmPackages_17.libcxxClang
+          llvmPackages_17.lld
+          llvmPackages_17.lldb
+          
+          cmake
+          ninja
+          doxygen
+          cmake-format
+          cmakeCurses 
+
+          gdb
+          valgrind 
+          kcachegrind
+
+          cppcheck
+          
+          ccache
+          python312 
+        ];
+        shellHook = ''
+          export CMAKE_EXPORT_COMPILE_COMMANDS=1;
+          export CMAKE_GENERATOR=Ninja;
+          # optim vs debug?
+          #export CXXFLAGS='-O3';
+          export CXX='clang++';
+          export CC='clang';
+          export CXXFLAGS='-Wall -ggdb3 -O2 -fexperimental-library';
+        '';
       };
     };
 }

@@ -1,38 +1,33 @@
 { pkgs, lib, home-id, ... }:
 {
   home.shellAliases = {
-    which = "type -a";
-
     cat = "${pkgs.bat}/bin/bat --paging=never";
     catp = "${pkgs.bat}/bin/bat --no-paging --plain";
     less = "${pkgs.bat}/bin/bat";
     lessp = "${pkgs.bat}/bin/bat --plain";
 
-    weather = "curl wttr.in/London";
 
+    which = "type -a";
     find = ''${pkgs.fd}/bin/fd'';
-
     la = "ls -a";
     cdr = "cd $(git rev-parse --show-toplevel)";
     ls = "${pkgs.lsd}/bin/lsd";
 
     o = "xdg-open";
-
     hms = "home-manager switch --flake ~/.config/home-manager/#${home-id}";
-
-    cppshell = "nix develop ~/.config/home-manager/applications/shell/devShells/cpp";
-    pyshell = "nix develop ~/.config/home-manager/applications/shell/devShells/python";
+    weather = "curl wttr.in/London";
   };
 
   programs.zsh = {
     shellAliases = { 
-      nd = "nix develop --command zsh";
+      cppshell = "nd ~/.config/home-manager/applications/shell/devShells/cpp";
+      pyshell  = "nd ~/.config/home-manager/applications/shell/devShells/python";
     };
 
     shellGlobalAliases = {
       # so then you can do ie ''vim fd F'' or ''cat ff F''.
       # fzf-tab doesn't search ALL dirs at a time, which can be either good/bad.
-      fd = ''find -t d'';
+      fdir = ''find -t d'';
       ff = ''find -t f'';
       fcpp = ''find -e hpp -e h -e c -e cpp'';
       F = " | fzf";
@@ -55,6 +50,9 @@
 
     initExtra = ''
       # functions
+      function nd() {
+        nix develop $1 --command zsh
+      }
       function cl() {
         cd $1 && la
       }

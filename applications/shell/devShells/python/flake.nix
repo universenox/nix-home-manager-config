@@ -9,11 +9,12 @@
 
       # populate packages here...
       # actually, I prefer poetry!?
-      pythonEnv = pkgs.python311.withPackages (p: with p; [ ]);
+      #pythonEnv = pkgs.python311.withPackages (p: with p; [ ]);
     in
     with pkgs;{
       devShells.x86_64-linux.default = mkShell {
-        packages = [ pythonEnv ];
+        name = "pythonshell";
+        packages = [ python313 ];
       };
     };
 }

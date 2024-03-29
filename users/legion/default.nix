@@ -34,6 +34,7 @@
       handlr # a better xdg-open?
 
       octaveFull
+      ghostscript # dep of octave
 
       # wayland screenshot... 
       swappy
