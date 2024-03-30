@@ -16,7 +16,7 @@
     packages = with pkgs; [
       lnav # log navigator, amazing.
       ripgrep
-      #fd       # find alt
+      fd       # find alt
       tree
       sd # sed alt
       lsd # ls alt
@@ -42,6 +42,8 @@
 
       gdu # du alt
       jq # json
+      glow # render markdown in cli
+      miller # like jq but for any tabular
       openssl
       socat
       ascii # ascii table

@@ -1,11 +1,5 @@
 { config, pkgs, ... }:
 {
-  home.shellAliases = {
-    run = "rofi -show drun";
-    emoji = "rofi -show emoji"; # emojis do not show. but shows in kitty so idk.
-    window = "rofi -show window";
-  };
-
   home.packages = [ pkgs.wtype ];
 
   home.file.".config/rofi/ktheme.rasi".text =
@@ -34,7 +28,7 @@
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    # emoji is broken :(
     plugins = with pkgs; [ rofi-emoji ];
     extraConfig = {
       modi = "drun,window,emoji";

@@ -6,9 +6,11 @@
     less = "${pkgs.bat}/bin/bat";
     lessp = "${pkgs.bat}/bin/bat --plain";
 
+    run = "rofi -show drun";
+    emoji = "rofi -show emoji"; # emojis broken.
+    window = "rofi -show window";
 
     which = "type -a";
-    find = ''${pkgs.fd}/bin/fd'';
     la = "ls -a";
     cdr = "cd $(git rev-parse --show-toplevel)";
     ls = "${pkgs.lsd}/bin/lsd";
@@ -24,28 +26,28 @@
       pyshell  = "nd ~/.config/home-manager/applications/shell/devShells/python";
     };
 
-    shellGlobalAliases = {
-      # so then you can do ie ''vim fd F'' or ''cat ff F''.
-      # fzf-tab doesn't search ALL dirs at a time, which can be either good/bad.
-      fdir = ''find -t d'';
-      ff = ''find -t f'';
-      fcpp = ''find -e hpp -e h -e c -e cpp'';
-      F = " | fzf";
-    };
-
     zsh-abbr = {
       enable = true;
-
+      # home-manager doesn't support global, but global is meh since 
+      # the actual plugin doesn't do expansion after `$(`. use zsh's shellGlobalAliases instead.
       abbreviations = {
-        g = "git";
-        "git co" = "git checkout";
-        "git cm" = "git commit";
-        "git staash" = "git stash --all";
-        "git s" = "git status";
-        "git a" = "git add -A";
-        "git wip" = ''git commit -m "WIP"'';
-        "git d" = ''git diff'';
+        "g"="git";
+        "git co"="git checkout";
+        "git cm"="git commit";
+        "git s"="git status";
+        "git a"="git add -A";
+        "git d"="git diff";
+        "git wip"=''git commit -m "WIP"'';
       };
+    };
+
+    # so then you can do ie ''la $(fdd F)'' or ''cat $(fdf F)''.
+    # fzf-tab just searches the first depth, vs this.
+    shellGlobalAliases = {
+        fdd   ="fd -t d";
+        fdf   ="fd -t f";
+        fdcpp ="fd -e hpp -e h -e c -e cpp";
+        F     =" | fzf";
     };
 
     initExtra = ''
@@ -60,6 +62,9 @@
         test -d "$1" && echo "directory $1 already existed.  Entering it..."
         test -d "$1" || mkdir -p "$1"
         test -d "$1" && cd "$1"
+      }
+      routes () {
+          ip -d -j route show table all | jq '(.[][] | arrays) |= tostring' | mlr --j2p unsparsify then reorder -f dst,gateway,dev,prefsrc,scope,table,type,metric,protocol
       }
     ''
     +
