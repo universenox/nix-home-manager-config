@@ -16,12 +16,20 @@
       url = "github:Aloxaf/fzf-tab";
       flake = false;
     };
+    zplug-fzf-source = {
+      url = "github:Freed-Wu/fzf-tab-source";
+      flake = false;
+    };
     zplug-nix-shell = {
       url = "github:chisui/zsh-nix-shell";
       flake = false;
     };
-    zplug-zsh-syntax-highlighting = {
-      url = "github:zsh-users/zsh-syntax-highlighting";
+    zplug-fast-syntax-highlighting = {
+      url = "github:zdharma-continuum/fast-syntax-highlighting";
+      flake = false;
+    };
+    zplug-you-should-use = {
+      url = "github:MichaelAquilina/zsh-you-should-use";
       flake = false;
     };
     starship-config = {

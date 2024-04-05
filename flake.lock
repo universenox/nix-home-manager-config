@@ -332,15 +332,17 @@
         "home-manager": "home-manager_3",
         "nixpkgs": "nixpkgs_6",
         "starship-config": "starship-config",
+        "zplug-fast-syntax-highlighting": "zplug-fast-syntax-highlighting",
+        "zplug-fzf-source": "zplug-fzf-source",
         "zplug-fzf-tab": "zplug-fzf-tab",
         "zplug-nix-shell": "zplug-nix-shell",
         "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
         "zplug-spaceship-prompt": "zplug-spaceship-prompt",
-        "zplug-zsh-syntax-highlighting": "zplug-zsh-syntax-highlighting"
+        "zplug-you-should-use": "zplug-you-should-use"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-hD5Cu/Hvv6EwJ1KYcckvtI9M37PrLPa2oeayHjzZQUo=",
+        "narHash": "sha256-yi+R+1AzJuHUi7hGPwfCov3PKSa2Qat3sAmL0zoG2+o=",
         "path": "applications/shell",
         "type": "path"
       },
@@ -374,6 +376,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zplug-fast-syntax-highlighting": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688591419,
+        "narHash": "sha256-RVX9ZSzjBW3LpFs2W86lKI6vtcvDWP6EPxzeTcRZua4=",
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "rev": "cf318e06a9b7c9f2219d78f41b46fa6e06011fd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "type": "github"
+      }
+    },
+    "zplug-fzf-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711030934,
+        "narHash": "sha256-nYJVDm44BKK/dgugLdW7lPgggGxEV91slk8sth7BgvM=",
+        "owner": "Freed-Wu",
+        "repo": "fzf-tab-source",
+        "rev": "63ba0b98e506da29dcc1bcf0f48525e69c0a5c47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Freed-Wu",
+        "repo": "fzf-tab-source",
         "type": "github"
       }
     },
@@ -441,19 +475,19 @@
         "type": "github"
       }
     },
-    "zplug-zsh-syntax-highlighting": {
+    "zplug-you-should-use": {
       "flake": false,
       "locked": {
-        "lastModified": 1704566212,
-        "narHash": "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=",
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
-        "rev": "e0165eaa730dd0fa321a6a6de74f092fe87630b0",
+        "lastModified": 1681926346,
+        "narHash": "sha256-lKs6DhG3x/oRA5AxnRT+odCZFenpS86wPnPqxLonV2E=",
+        "owner": "MichaelAquilina",
+        "repo": "zsh-you-should-use",
+        "rev": "1f9cb008076d4f2011d5f814dfbcfbece94a99e0",
         "type": "github"
       },
       "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
+        "owner": "MichaelAquilina",
+        "repo": "zsh-you-should-use",
         "type": "github"
       }
     }

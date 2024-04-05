@@ -52,11 +52,12 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "starship-config": "starship-config",
+        "zplug-fast-syntax-highlighting": "zplug-fast-syntax-highlighting",
+        "zplug-fzf-source": "zplug-fzf-source",
         "zplug-fzf-tab": "zplug-fzf-tab",
         "zplug-nix-shell": "zplug-nix-shell",
         "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
-        "zplug-spaceship-prompt": "zplug-spaceship-prompt",
-        "zplug-zsh-syntax-highlighting": "zplug-zsh-syntax-highlighting"
+        "zplug-spaceship-prompt": "zplug-spaceship-prompt"
       }
     },
     "starship-config": {
@@ -70,6 +71,38 @@
       "original": {
         "path": "./starship.toml",
         "type": "path"
+      }
+    },
+    "zplug-fast-syntax-highlighting": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688591419,
+        "narHash": "sha256-RVX9ZSzjBW3LpFs2W86lKI6vtcvDWP6EPxzeTcRZua4=",
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "rev": "cf318e06a9b7c9f2219d78f41b46fa6e06011fd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zdharma-continuum",
+        "repo": "fast-syntax-highlighting",
+        "type": "github"
+      }
+    },
+    "zplug-fzf-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1711030934,
+        "narHash": "sha256-nYJVDm44BKK/dgugLdW7lPgggGxEV91slk8sth7BgvM=",
+        "owner": "Freed-Wu",
+        "repo": "fzf-tab-source",
+        "rev": "63ba0b98e506da29dcc1bcf0f48525e69c0a5c47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Freed-Wu",
+        "repo": "fzf-tab-source",
+        "type": "github"
       }
     },
     "zplug-fzf-tab": {
@@ -133,22 +166,6 @@
       "original": {
         "owner": "spaceship-prompt",
         "repo": "spaceship-prompt",
-        "type": "github"
-      }
-    },
-    "zplug-zsh-syntax-highlighting": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1704566212,
-        "narHash": "sha256-4rW2N+ankAH4sA6Sa5mr9IKsdAg7WTgrmyqJ2V1vygQ=",
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
-        "rev": "e0165eaa730dd0fa321a6a6de74f092fe87630b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-users",
-        "repo": "zsh-syntax-highlighting",
         "type": "github"
       }
     }

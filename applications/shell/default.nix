@@ -21,6 +21,11 @@
       sd # sed alt
       lsd # ls alt
       choose # cut alt
+      hyperfine # time alt
+      huniq 
+
+      python311Packages.pygments # some stuff uses it in zsh..
+      grc
 
       timewarrior
       taskwarrior
@@ -46,7 +51,7 @@
       miller # like jq but for any tabular
       openssl
       socat
-      ascii # ascii table
+      # ascii # ascii table; some OS come with one already.
     ];
   };
   programs = {
@@ -63,6 +68,7 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    lesspipe.enable = false; # pita
     helix.enable = true;
     bash.enable = true;
     tmux = {
@@ -91,24 +97,47 @@
         # put comment after cmd to help find it in history?
         setopt interactivecomments
 
-        ###
+        # export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
         # suggestions from fzf-tab  
-        ###
-        # disable sort when completing `git checkout`
-        zstyle ':completion:*:git-checkout:*' sort false
-        # set descriptions format to enable group support
-        # NOTE: don't use escape sequences here, fzf-tab will ignore them
         zstyle ':completion:*:descriptions' format '[%d]'
-        # set list-colors to enable filename colorizing
         zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-        # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
         zstyle ':completion:*' menu no
-        # preview directory's content with lsd when completing cd
-        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
-        # switch group using `<` and `>`
-        zstyle ':fzf-tab:*' switch-group '<' '>'      
+        # zstyle ':fzf-tab:*' switch-group '<' '>'      
 
         zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+        zstyle ':fzf-tab:complete:*:*' fzf-preview \
+        'if test -d $realpath; then 
+          lsd --color=always $realpath 
+         else 
+          bat --paging=never --color=always --style=plain $realpath 
+         fi'
+        zstyle ':fzf-tab:complete:*:*' fzf-flags '--height=90%'
+        zstyle ':fzf-tab:*' popup-min-size 500 500
+
+        zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+            '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+        zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
+
+        zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+        zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --color=always $realpath'
+        zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
+
+        # git
+        zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+        zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git log --color=always $word'
+        zstyle ':fzf-tab:complete:git-help:*' fzf-preview 'git help $word | bat -plman --color=always'
+        zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+        	'case "$group" in
+        	"commit tag") git show --color=always $word ;;
+        	*) git show --color=always $word | delta ;;
+        	esac'
+        zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+        	'case "$group" in
+        	"modified file") git diff $word | delta ;;
+        	"recent commit object name") git show --color=always $word | delta ;;
+        	*) git log --color=always $word ;;
+        	esac'
       '';
       plugins =
         let
@@ -120,9 +149,11 @@
         in
         [
           (mkPlugin "nix-zsh-completions")
-          (mkPlugin "fzf-tab")
           (mkPlugin "nix-shell")
-          (mkPlugin "zsh-syntax-highlighting")
+          (mkPlugin "fast-syntax-highlighting")
+          (mkPlugin "you-should-use")
+          (mkPlugin "fzf-source")
+          (mkPlugin "fzf-tab")
         ];
     };
   };
