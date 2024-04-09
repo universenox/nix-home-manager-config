@@ -49,6 +49,7 @@
       jq # json
       glow # render markdown in cli
       miller # like jq but for any tabular
+      zip
       openssl
       socat
       # ascii # ascii table; some OS come with one already.

@@ -1,10 +1,11 @@
 { pkgs, lib, home-id, ... }:
 {
-  home.shellAliases = {
-    cat = "${pkgs.bat}/bin/bat --paging=never";
-    catp = "${pkgs.bat}/bin/bat --no-paging --plain";
-    less = "${pkgs.bat}/bin/bat";
-    lessp = "${pkgs.bat}/bin/bat --plain";
+  home.shellAliases = 
+  {
+    cat = ''${pkgs.bat}/bin/bat --style="changes,header,header-filename,header-filesize,snip"'';
+    catp = "${pkgs.bat}/bin/bat --no-paging --plain"; 
+    less = ''${pkgs.bat}/bin/bat --style=auto'';
+    lessp = ''${pkgs.bat}/bin/bat --plain'';
     uniq = "${pkgs.huniq}/bin/huniq";
 
     run = "rofi -show drun";
@@ -14,6 +15,7 @@
     which = "type -a";
     cdr = "cd $(git rev-parse --show-toplevel)";
     ls = "${pkgs.lsd}/bin/lsd";
+    glow = "glow $1 -p bat";
 
     # copied from https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/common-aliases
     l = "ls -lFh";
@@ -55,6 +57,7 @@
         "git a"="git add -A";
         "git d"="git diff";
         "git wip"=''git commit -m "WIP"'';
+        "git rerere-clearall"=''rm -rf ./.git/rr-cache/''; # oopsie. 
       };
     };
 
@@ -74,9 +77,10 @@
 
     initExtra = ''
       # functions
-      function nd() {
-        nix develop $1 --command zsh
-      }
+      function nd() { nix develop $1 --command zsh }
+      function cl() { cd $1 && la }
+      function ninja() { command ninja $@ | bat -l make }
+      
       function latexify_md() {
         in="$1"
         out="$2"
@@ -86,9 +90,7 @@
         # idk.
         pandoc $in --from markdown+tex_math_dollars+tex_math_single_backslash+lists_without_preceding_blankline -o $out
       }
-      function cl() {
-        cd $1 && la
-      }
+
       function mkcd() {
         test -d "$1" && echo "directory $1 already existed.  Entering it..."
         test -d "$1" || mkdir -p "$1"

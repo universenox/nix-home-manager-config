@@ -15,6 +15,7 @@
           bear
 
           boost183
+          gbenchmark
 
           clang-tools_17
           llvmPackages_17.clang
@@ -46,7 +47,8 @@
           #export CXXFLAGS='-O3';
           export CXX='clang++';
           export CC='clang';
-          export CXXFLAGS='-Wall -ggdb3 -O2 -fexperimental-library';
+          # alias set_debug_flags="export CXXFLAGS='-Wall -ggdb3 -O2 -fexperimental-library'" ;
+          # alias set_prod_flags="export CXXFLAGS='-Wall -O3 -fexperimental-library'" ;
         '';
       };
     };

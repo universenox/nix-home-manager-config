@@ -57,7 +57,8 @@
         "zplug-fzf-tab": "zplug-fzf-tab",
         "zplug-nix-shell": "zplug-nix-shell",
         "zplug-nix-zsh-completions": "zplug-nix-zsh-completions",
-        "zplug-spaceship-prompt": "zplug-spaceship-prompt"
+        "zplug-spaceship-prompt": "zplug-spaceship-prompt",
+        "zplug-you-should-use": "zplug-you-should-use"
       }
     },
     "starship-config": {
@@ -166,6 +167,22 @@
       "original": {
         "owner": "spaceship-prompt",
         "repo": "spaceship-prompt",
+        "type": "github"
+      }
+    },
+    "zplug-you-should-use": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681926346,
+        "narHash": "sha256-lKs6DhG3x/oRA5AxnRT+odCZFenpS86wPnPqxLonV2E=",
+        "owner": "MichaelAquilina",
+        "repo": "zsh-you-should-use",
+        "rev": "1f9cb008076d4f2011d5f814dfbcfbece94a99e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MichaelAquilina",
+        "repo": "zsh-you-should-use",
         "type": "github"
       }
     }

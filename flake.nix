@@ -1,16 +1,21 @@
 {
   description = "Home Manager configuration";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
 
-
-    # weirdness, https://github.com/NixOS/nix/issues/3978
-    # but idc,
+    # pretty bad.... but i don't want several versions of pkgs repo at once.
+    
     shell.url = "path:applications/shell";
+    shell.inputs.nixpkgs.follows = "nixpkgs";
+    shell.inputs.home-manager.follows = "home-manager";
+
     helix.url = "path:applications/helix";
+    helix.inputs.nixpkgs.follows = "nixpkgs";
+    helix.inputs.home-manager.follows = "home-manager";
+    #helix.inputs.rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-colors.url = "github:misterio77/nix-colors";
   };

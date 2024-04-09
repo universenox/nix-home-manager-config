@@ -18,7 +18,10 @@
       branch = {
         autoSetupMerge = true;
         autoSetupRebase = "always"; # pull rebases instead of merge
-        fetch = { prune = true; };
+        fetch = { 
+          prune = true; 
+          pruneTags = true;
+        };
         pull = { rebase = true; };
         rebase = {
           autoSquash = true;

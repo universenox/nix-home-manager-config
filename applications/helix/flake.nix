@@ -1,6 +1,8 @@
 {
   inputs = {
     helixpkg.url = "github:helix-editor/helix";
+    helixpkg.inputs.nixpkgs.follows = "nixpkgs";
+
     helix-base16-themes = {
       url = "github:tinted-theming/base16-helix";
       flake = false;

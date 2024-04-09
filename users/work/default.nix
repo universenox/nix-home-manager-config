@@ -33,6 +33,7 @@
       doxygen
       cmake-format
       ccache
+      poetry
 
       # perms, never....
       # (python311.withPackages (p: with p; [
