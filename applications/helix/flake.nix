@@ -16,6 +16,6 @@
     in
     {
       homeManagerModules.default =
-        (import ./default.nix { inherit home-manager pkgs themesDir; });
+        (import ./default.nix { inherit home-manager pkgs themesDir helixpkg; });
     };
 }

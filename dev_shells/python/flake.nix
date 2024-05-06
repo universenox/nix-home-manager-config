@@ -6,15 +6,16 @@
   outputs = inputs @ { nixpkgs, ... }:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pythonver = pkgs.python313;
 
       # populate packages here...
       # actually, I prefer poetry!?
-      #pythonEnv = pkgs.python311.withPackages (p: with p; [ ]);
+      # pythonEnv = pkgs.${pythonver}.withPackages (p: with p; [ ]);
     in
     with pkgs;{
       devShells.x86_64-linux.default = mkShell {
         name = "pythonshell";
-        packages = [ python313 ];
+        packages = with pkgs; [ pythonver poetry ];
       };
     };
 }

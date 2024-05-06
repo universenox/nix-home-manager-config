@@ -1,14 +1,17 @@
 {
   description = "Home Manager configuration";
   inputs = {
+    # careful, different version between home vs OS; suspect interops may break.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
 
-    # pretty bad.... but i don't want several versions of pkgs repo at once.
+    # Use `follows` because I don't want several versions of * repo at once. 
+    # More likely to break on update, though (since they'd have likely tested 
+    # with the version their flake has pinned, rather than the one I'm giving it).
     
-    shell.url = "path:applications/shell";
-    shell.inputs.nixpkgs.follows = "nixpkgs";
-    shell.inputs.home-manager.follows = "home-manager";
+    zsh.url = "path:applications/zsh";
+    #zsh.inputs.home-manager.follows = "home-manager";
+    # shell.inputs.nixpkgs.follows = "nixpkgs";
 
     helix.url = "path:applications/helix";
     helix.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,10 +19,9 @@
     #helix.inputs.rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-colors.url = "github:misterio77/nix-colors";
   };
-  outputs = { nixpkgs, home-manager, shell, helix, nix-colors, ... }:
+  outputs = { nixpkgs, home-manager, zsh, helix, nix-colors, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,11 +30,13 @@
         name = "${home-id}";
         value = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = { inherit nix-colors; inherit home-id; };
-          modules = [
+          extraSpecialArgs = { inherit nix-colors home-id; };
+          modules = 
+          [
             nix-colors.homeManagerModules.default
-            shell.homeManagerModules.default
+            zsh.homeManagerModules.default
             helix.homeManagerModules.default
+            ./common.nix
             ./users/${home-id}
           ];
         };

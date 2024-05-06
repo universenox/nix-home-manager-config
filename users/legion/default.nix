@@ -1,24 +1,18 @@
-{ pkgs, color, ... }@inputs:
+{ pkgs, ... }@inputs:
 {
   imports = [
-    ../../common.nix
-    ../../applications/rofi
-    ../../applications/git
     ./taskw-export-timer.nix
   ];
 
-  services.syncthing = {
-    enable = true;
-    tray.enable = true;
-  };
-
   programs.ssh = {
     enable = true;
+    addKeysToAgent = "yes";
     matchBlocks = {
-      "kimserv" = {
-        host = "kimserv 185.193.158.96";
-        hostname = "185.193.158.96";
+      "vps" = {
+        host = "vps";
+        hostname = "vps.vps.vpn.net";
         user = "kim";
+        identityFile = "~/.ssh/id_ed25519";
       };
     };
   };
@@ -28,7 +22,6 @@
     homeDirectory = "/home/kim";
 
     packages = with pkgs; [
-      poetry
       pass
       neofetch
       handlr # a better xdg-open?
@@ -73,6 +66,7 @@
 
       nomachine-client # remote desktop for work
       noto-fonts-cjk # japanese
+
     ];
   };
 
@@ -85,10 +79,14 @@
 
   # japanese
   # TODO.
-  # i18n.inputMethod = {
-  #   enabled = "fcitx5";
-  #   fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
-  # };
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+  };
+  # Would normally set this to fcitx, but kitty only supports ibus, and fcitx
+  # provides an ibus interface. Can't use ibus for e.g. QT_IM_MODULE though,
+  # because that at least breaks mumble
+  home.sessionVariables.GLFW_IM_MODULE = "ibus";
 
   services.mpd = {
     enable = true;

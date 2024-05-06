@@ -5,6 +5,17 @@
     enable = true;
     # see git aliases in shell/ alias config.
 
+    aliases = {
+      "co"             = "checkout";
+      "cm"             = "commit";
+      "s"              = "status";
+      "a"              = "add -A";
+      "d"              = "diff";
+      "wip"            = ''commit -m "WIP"'';
+      "rerere-clearall"= ''rm -rf ./.git/rr-cache/''; # oopsie. 
+      "lightclone" = "git clone --depth=1 --sparse";
+    };
+
     # see man git-config
     extraConfig = {
       core.untrackedCache = true;
@@ -44,6 +55,6 @@
       interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
       delta.navigate = true;
     };
-    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/"];
+    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/" "**/__pycache__/"];
   };
 }

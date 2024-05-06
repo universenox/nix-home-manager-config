@@ -32,18 +32,11 @@
       url = "github:MichaelAquilina/zsh-you-should-use";
       flake = false;
     };
-    starship-config = {
-      url = "path:./starship.toml";
-      flake = false;
-    };
   };
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
+  outputs = inputs@{ ... }:
     {
+      # doesn't even use HM...
       homeManagerModules.default =
-        (import ./default.nix { inherit pkgs inputs; });
+        (import ./default.nix { inherit inputs;  }); 
     };
 }

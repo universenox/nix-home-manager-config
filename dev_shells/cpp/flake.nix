@@ -10,20 +10,29 @@
     with pkgs;{
       devShells.x86_64-linux.default = mkShell {
         name = "cppshell";
-        packages = [ 
+        packages = let 
+          llvmPackages=llvmPackages_18; 
+          in [ 
           cmake
           bear
 
           boost183
           gbenchmark
 
-          clang-tools_17
-          llvmPackages_17.clang
-          llvmPackages_17.clang-manpages
+          stdmanpages
+          linux-manual
+          man-pages
 
-          llvmPackages_17.libcxxClang
-          llvmPackages_17.lld
-          llvmPackages_17.lldb
+          # clang-tools_17
+          llvmPackages.clang
+          llvmPackages.libcxxClang
+          llvmPackages.lld
+          llvmPackages.lldb
+
+          llvmPackages.clang-manpages
+          llvmPackages.llvm-manpages
+          llvmPackages.bintools
+          # llvmPackages_17.openmp
           
           cmake
           ninja
