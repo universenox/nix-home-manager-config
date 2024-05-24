@@ -6,36 +6,34 @@
   outputs = inputs @ { nixpkgs, ... }:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      llvmPackages = pkgs.llvmPackages_18;
     in
     with pkgs;{
-      devShells.x86_64-linux.default = mkShell {
+      devShells.x86_64-linux.default = 
+      ( mkShell.override { stdenv=llvmPackages.stdenv; }) 
+      {
         name = "cppshell";
-        packages = let 
-          llvmPackages=llvmPackages_18; 
-          in [ 
-          cmake
-          bear
-
-          boost183
-          gbenchmark
-
+        packages = with llvmPackages; [ 
           stdmanpages
           linux-manual
           man-pages
 
-          # clang-tools_17
-          llvmPackages.clang
-          llvmPackages.libcxxClang
+          cmake
+          bear # generates compile_commands.json from simple one-line compiler invocation
+          ninja
+
+          boost183
+          gbenchmark
+
+          clang-tools_18 # This clangd works. clangd in other package bad.
           llvmPackages.lld
           llvmPackages.lldb
 
           llvmPackages.clang-manpages
           llvmPackages.llvm-manpages
           llvmPackages.bintools
-          # llvmPackages_17.openmp
+          llvmPackages.openmp
           
-          cmake
-          ninja
           doxygen
           cmake-format
           cmakeCurses 
@@ -47,18 +45,14 @@
           cppcheck
           
           ccache
-          python312 
+          python312
         ];
-        shellHook = ''
-          export CMAKE_EXPORT_COMPILE_COMMANDS=1;
-          export CMAKE_GENERATOR=Ninja;
-          # optim vs debug?
-          #export CXXFLAGS='-O3';
-          export CXX='clang++';
-          export CC='clang';
-          # alias set_debug_flags="export CXXFLAGS='-Wall -ggdb3 -O2 -fexperimental-library'" ;
-          # alias set_prod_flags="export CXXFLAGS='-Wall -O3 -fexperimental-library'" ;
-        '';
+        buildInputs = [
+          llvmPackages.libcxxClang
+        ];
+
+        CMAKE_EXPORT_COMPILE_COMMANDS=''1'';
+        CMAKE_GENERATOR              =''Ninja'';
       };
     };
 }

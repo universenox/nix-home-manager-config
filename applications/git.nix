@@ -1,4 +1,4 @@
-{ config, pkgs, home-id, ... }:
+{ pkgs, home-id, ... }:
 {
   home.packages = with pkgs; [ delta ];
   programs.git = {

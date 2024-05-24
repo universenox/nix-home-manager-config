@@ -1,5 +1,5 @@
 # common across all configurations
-{ pkgs,lib, nix-colors, ... }:
+{ pkgs,... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
@@ -7,17 +7,11 @@
 
   # note the modules in my flake are also "common"
   imports = [
-    ./applications/kitty
-    ./applications/git
+    ./applications/git.nix
     ./applications/tmux.nix
     ./config/shell_aliases_fns.nix
     ./config/starship_prompt.nix
   ];
-  #### colors ####
-  colorScheme = nix-colors.colorSchemes.gruvbox-material-dark-soft;
-  programs.helix.settings.theme = "base16-gruvbox-material-dark-soft";
-  programs.kitty.theme = "Gruvbox Material Dark Soft";
-  ###############
 
   home = {
     stateVersion = "23.11"; # no touchy
@@ -39,11 +33,7 @@
       huniq 
       inetutils # telnet, etc
 
-      python311Packages.pygments # some stuff uses it in zsh..
-      grc
-
       timewarrior
-      taskwarrior
       buku # bookmarks
       lazygit
       btop
@@ -56,6 +46,8 @@
       nix-tree
       shellcheck
       shfmt
+      marksman
+      dprint # md
 
       tokei # count LoC
       tealdeer # tldr alt
@@ -67,7 +59,6 @@
       zip
       openssl
       socat
-      # ascii # ascii table; some OS come with one already.
 
       hack-font
       # fira needed for emojis on `lsd`
@@ -79,6 +70,7 @@
       xclip
     ];
   };
+  home.file.".dprint.json".source = ./config/dprint.json;
  
   programs = {
     atuin.enable = true; # cmd history
@@ -90,6 +82,7 @@
     nix-index.enable = true; # nix-locate <cmd> to see what provides it
     less.enable = true;
     zoxide.enable = true;
+    # direnv breaks aliases in shellHooks...?
     direnv = {
       enable = true;
       nix-direnv.enable = true;

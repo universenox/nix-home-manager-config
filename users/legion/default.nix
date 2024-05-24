@@ -26,19 +26,8 @@
       neofetch
       handlr # a better xdg-open?
 
-      octaveFull
-      ghostscript # dep of octave
-
-      # wayland screenshot... 
-      swappy
-      slurp
-      grim
-      wl-clipboard # for helix yank to system clipboard
-
       nil # nix lang serv
       vscode-langservers-extracted # html css json eslint
-      nginx # testing
-      hugo
 
       firefox
       leetcode-cli
@@ -48,14 +37,17 @@
       element-desktop
 
       android-studio
-      android-file-transfer
+      android-file-transfer # mainly for eink device since phone has syncthing
 
       anki
+
+      jiten # jp dictionary CLI
+      noto-fonts-cjk # japanese
+
       qbittorrent
       vlc
       mpv # better!?
       yt-dlp
-      tauon # music
       obs-studio
       pandoc
       discord
@@ -63,10 +55,6 @@
       texliveFull
       gimp
       inkscape
-
-      nomachine-client # remote desktop for work
-      noto-fonts-cjk # japanese
-
     ];
   };
 
@@ -78,18 +66,8 @@
   };
 
   # japanese
-  # TODO.
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [ fcitx5-mozc ];
-  };
-  # Would normally set this to fcitx, but kitty only supports ibus, and fcitx
-  # provides an ibus interface. Can't use ibus for e.g. QT_IM_MODULE though,
-  # because that at least breaks mumble
-  home.sessionVariables.GLFW_IM_MODULE = "ibus";
-
-  services.mpd = {
-    enable = true;
-    musicDirectory = "~/Music";
   };
 }

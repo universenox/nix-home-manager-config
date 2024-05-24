@@ -10,7 +10,6 @@
       syntaxHighlighting.enable = true;
       sessionVariables = {
         ZSH_AUTOSUGGEST_STRATEGY = [ "history" "completion" ];
-        SHELL = "zsh";
       };
       initExtra = ''
         bindkey '^ ' autosuggest-accept
@@ -58,6 +57,11 @@
         	"recent commit object name") git show --color=always $word | delta ;;
         	*) git log --color=always $word ;;
         	esac'
+
+          # start into the one tmux session for your user...
+          if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+              cd $HOME && tmux new-session -A -s ''${USER} >/dev/null 2>&1
+          fi      
       '';
       plugins =
         let

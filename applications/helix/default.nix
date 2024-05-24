@@ -25,7 +25,11 @@
     name = "cpp" 
     auto-format = true
     language-servers = [ { name = "clangd" } ]
-    formatter = { command = "clang-format", args = ["--style=file:~/.config/home-manager/applications/shell/clang-format",  "--assume-filename=cpp.cpp"] }
+    formatter = { command = "clang-format", args = ["--style=LLVM",  "--assume-filename=cpp.cpp"] }
+
+    [[language]]
+    name = "markdown"
+    formatter = { command = "dprint", args = ["fmt", "--stdin", "md"]}
   '';
 
   programs.helix =  {

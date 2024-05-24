@@ -1,0 +1,62 @@
+{
+  "nodes": {
+    "p-anysize": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-fGK8Vk8WQ/wjmeIz81ZZpVRJegFH3vVk5HKtiMETsm0=",
+        "type": "file",
+        "url": "https://st.suckless.org/patches/anysize/st-expected-anysize-0.9.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://st.suckless.org/patches/anysize/st-expected-anysize-0.9.diff"
+      }
+    },
+    "p-appsync": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-8kWBYzw7qvrGIC6XYUvu/drZxL6PnDFbDfv89kJhVLI=",
+        "type": "file",
+        "url": "https://st.suckless.org/patches/sync/st-appsync-20200618-b27a383.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://st.suckless.org/patches/sync/st-appsync-20200618-b27a383.diff"
+      }
+    },
+    "p-fullscreen": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-wjSGoFuk71q+vWKVpWxMVtJjjim0E5E2VU3igHDrbsw=",
+        "type": "file",
+        "url": "https://st.suckless.org/patches/fullscreen/st-fullscreen-0.8.5.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://st.suckless.org/patches/fullscreen/st-fullscreen-0.8.5.diff"
+      }
+    },
+    "p-ligature": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-MYQrA67JUzWagRa5+WH4NjAeL+kETxtzrwgyveBvBaI=",
+        "type": "file",
+        "url": "https://st.suckless.org/patches/ligatures/0.9/st-ligatures-20240105-0.9.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://st.suckless.org/patches/ligatures/0.9/st-ligatures-20240105-0.9.diff"
+      }
+    },
+    "root": {
+      "inputs": {
+        "p-anysize": "p-anysize",
+        "p-appsync": "p-appsync",
+        "p-fullscreen": "p-fullscreen",
+        "p-ligature": "p-ligature"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

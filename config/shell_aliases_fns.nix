@@ -22,14 +22,31 @@ let common_initextra = ''
       routes() {
           ip -d -j route show table all | jq '(.[][] | arrays) |= tostring' | mlr --j2p unsparsify then reorder -f dst,gateway,dev,prefsrc,scope,table,type,metric,protocol;
       }
-      yl() { yt-dlp -f 140 --no-playlist "$1"; }
+      yl() { ( cd ~/Music/ && yt-dlp -f 140 --no-playlist "$1"; ) }
       html_to_pdf() { chromium --headless --no-sandbox --disable-gpu --print-to-pdf "$1"; }
       glow() { "${pkgs.glow}/bin/glow "$1" -p bat"; }
-  ''; in
+
+      repo_size() {
+        part="$1" # owner/repo
+        in_kilobytes=$(curl -sG "https://api.github.com/repos/$part" | jq '.size')
+        in_MB=$(( in_kilobytes / 1024 ))
+        echo "$in_MB MB"
+      }
+
+      # for when nix creates symlinks but i wanna try playing around with it 
+      # outside of nix for quicker iterations
+      replace_symlink(){
+        file="$1"
+        cp "$file" "$file-tmp"
+        rm "$file"
+        mv $file-tmp $file
+        chmod uaog+rwx $file
+      }
+''; in
 {
   programs.bash.initExtra = common_initextra;
   programs.zsh.initExtra  = common_initextra;
-  
+
   home.shellAliases = 
   {
     cat   = ''${pkgs.bat}/bin/bat --no-paging --style="changes,header,header-filename,header-filesize,snip"'';
@@ -37,15 +54,22 @@ let common_initextra = ''
     less  = ''${pkgs.bat}/bin/bat --style=auto'';
     lessp = ''${pkgs.bat}/bin/bat --plain'';
     uniq  = ''${pkgs.huniq}/bin/huniq'';
+    nd    = "nix develop";
+    rm    = "rm -rf";
+
+    # a deleted one in a recurrence = failed
+    # else completed = success
+    # `habit`
+    # `habit delete 1`
+    # `habit complete 1`
+    habit = "task rc.data.location=~/.habit";
 
     run           = "rofi -show drun";
     emoji         = "rofi -show emoji"; # emojis broken.
     window        = "rofi -show window";
 
-    which         = "type -a";
     cdr           = "cd $(git rev-parse --show-toplevel)";
     ls            = "${pkgs.lsd}/bin/lsd";
-
 
     igrep         = ''${pkgs.ripgrep}/bin/rg -i'';
 

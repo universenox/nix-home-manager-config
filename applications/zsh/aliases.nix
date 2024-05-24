@@ -21,6 +21,7 @@
       };
 
       initExtra = ''
+        # be aware: aliases defined in shellHook will not work.
         nd() { nix develop "$1" --command zsh; } 
       '';
   };
