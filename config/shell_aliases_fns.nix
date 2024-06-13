@@ -4,7 +4,7 @@ let common_initextra = ''
       cl() { cd "$1" && la; }
 
       # TODO: this is kinda shitty if output is large; doesn't follow tail, idk why
-      ninja() { command ninja "$@" | bat -l make; }
+      ninja() { command ninja "$@" | bat -l make --paging=never --style=plain; }
       mk_blank_pdf() { convert xc:none -page Letter blank.pdf; }
       pdf_append_blank_page() {  ${pkgs.pdftk}/bin/pdftk A="$1" B=blank.pdf cat A1-end B1-end output - ; }
       latexify_md() {
@@ -54,7 +54,6 @@ let common_initextra = ''
     less  = ''${pkgs.bat}/bin/bat --style=auto'';
     lessp = ''${pkgs.bat}/bin/bat --plain'';
     uniq  = ''${pkgs.huniq}/bin/huniq'';
-    nd    = "nix develop";
     rm    = "rm -rf";
 
     # a deleted one in a recurrence = failed

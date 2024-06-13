@@ -9,6 +9,7 @@
     in
     with pkgs;{
       devShells.x86_64-linux.default = mkShell {
+        name = "goshell";
         packages = [ go gopls gopkgs ];
       };
     };

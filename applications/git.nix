@@ -55,6 +55,6 @@
       interactive.diffFilter = "${pkgs.delta}/bin/delta --color-only";
       delta.navigate = true;
     };
-    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/" "**/__pycache__/"];
+    ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/" "**/__pycache__/" ".cache/"];
   };
 }

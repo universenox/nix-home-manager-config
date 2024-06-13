@@ -22,6 +22,10 @@
     };
 
     packages = with pkgs; [
+      stdmanpages # gcc c++ std
+      linux-manual # linux kernel API
+      man-pages # linux dev
+    
       lnav # log navigator, amazing.
       ripgrep
       fd       # find alt
