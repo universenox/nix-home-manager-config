@@ -17,6 +17,10 @@
         url = "https://st.suckless.org/patches/sync/st-appsync-20200618-b27a383.diff";
         flake = false;
    };
+   p-font2 = { 
+        url = "https://st.suckless.org/patches/font2/st-font2-0.8.5.diff";
+        flake = false;
+   };
   };
   outputs = inputs@{ ... }:
   {

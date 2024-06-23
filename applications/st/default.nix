@@ -14,6 +14,7 @@ in
                 p-anysize
                 p-fullscreen
                 p-appsync
+                p-font2
                 ./truecolor.patch
             ];
             extraLibs = with pkgs; [ harfbuzz ];

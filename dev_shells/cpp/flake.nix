@@ -9,15 +9,14 @@
       llvmPackages = pkgs.llvmPackages_18;
 
       # comment this out to use default gcc one.
-      dev-stdenv = llvmPackages.libcxxStdenv;
+      # dev-stdenv = llvmPackages.libcxxStdenv;
 
       compileInputs = with pkgs; [ 
           cmake
           boost183
-          boostext-ut.defaultPackage.x86_64-linux
           fmt
-          ( gbenchmark.override{ stdenv=dev-stdenv; })
-          ( abseil-cpp.override{ stdenv=dev-stdenv; })
+          gbenchmark
+          abseil-cpp
       ];
 
       devShellPackages = with pkgs; [
@@ -40,7 +39,8 @@
     with pkgs;{
       # `nix develop` shell
       devShells.x86_64-linux.default = 
-      ( mkShell.override { stdenv=dev-stdenv; }) 
+      # ( mkShell.override { stdenv=dev-stdenv; }) 
+      mkShell
       {
         name = "cppshell";
         packages = devShellPackages;

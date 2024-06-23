@@ -64,6 +64,8 @@
       openssl
       socat
 
+
+      # `fc-list`
       hack-font
       # fira needed for emojis on `lsd`
       fira-code

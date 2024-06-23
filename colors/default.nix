@@ -1,19 +1,23 @@
 { lib, nix-colors, ...}:
-{
+let
+  # --- light theme ---
+  # light kinda shit `ls`
+  # cs = "gruvbox-material-light-hard";
+  # bat = "gruvbox-light";
+  # --- dark theme ---
+  cs = "gruvbox-material-dark-soft";
+  bat = "gruvbox-dark";
+  # ------------------
+  helix = "base16-${cs}";
+in {
   options.colors = with lib; {
     enable = true;
     colorScheme = mkOption { 
       type = with types; attrs; 
-      default = nix-colors.colorSchemes.gruvbox-material-dark-soft; 
-      # default = nix-colors.colorSchemes.tokyo-city-terminal-light; 
+      default = nix-colors.colorSchemes.${cs}; 
       description = "colorscheme";
     };   
   };
-  config.programs.helix.settings.theme = "base16-gruvbox-material-dark-soft";
-  # config.programs.helix.settings.theme = "base16-tokyo-city-terminal-light";
-
-  config.home.sessionVariables = {
-    # BAT_THEME = "gruvbox-light"; # `bat --list-themes`
-    BAT_THEME = "gruvbox-dark"; # `bat --list-themes`
-  };
+  config.programs.helix.settings.theme = helix;
+  config.programs.bat.config.theme = bat;
 }

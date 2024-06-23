@@ -1,9 +1,5 @@
 { pkgs, ... }@inputs:
 {
-  imports = [
-    ./taskw-export-timer.nix
-  ];
-
   programs.ssh = {
     enable = true;
     addKeysToAgent = "yes";
@@ -32,9 +28,9 @@
       firefox
       leetcode-cli
 
-      zoom-us
-      slack
-      element-desktop
+      # zoom-us
+      # slack
+      # element-desktop
 
       android-studio
       android-file-transfer # mainly for eink device since phone has syncthing
@@ -52,7 +48,7 @@
       pandoc
       discord
       libreoffice
-      texliveFull
+      # texliveFull
       gimp
       inkscape
     ];
@@ -66,8 +62,8 @@
   };
 
   # japanese
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-mozc ];
-  };
+  # i18n.inputMethod = {
+  #   enabled = "fcitx5";
+  #   fcitx5.addons = with pkgs; [ fcitx5-mozc ];
+  # };
 }

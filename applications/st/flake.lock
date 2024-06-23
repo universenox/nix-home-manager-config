@@ -24,6 +24,18 @@
         "url": "https://st.suckless.org/patches/sync/st-appsync-20200618-b27a383.diff"
       }
     },
+    "p-font2": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-3bYkYm8e3ukVgvjeiCkYpcgGqUWVhwmCqWy56fgC0Yc=",
+        "type": "file",
+        "url": "https://st.suckless.org/patches/font2/st-font2-0.8.5.diff"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://st.suckless.org/patches/font2/st-font2-0.8.5.diff"
+      }
+    },
     "p-fullscreen": {
       "flake": false,
       "locked": {
@@ -52,6 +64,7 @@
       "inputs": {
         "p-anysize": "p-anysize",
         "p-appsync": "p-appsync",
+        "p-font2": "p-font2",
         "p-fullscreen": "p-fullscreen",
         "p-ligature": "p-ligature"
       }
