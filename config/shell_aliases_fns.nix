@@ -54,14 +54,9 @@ let common_initextra = ''
     less  = ''${pkgs.bat}/bin/bat --style=auto'';
     lessp = ''${pkgs.bat}/bin/bat --plain'';
     uniq  = ''${pkgs.huniq}/bin/huniq'';
+    tree  = ''${pkgs.tree}/bin/tree --gitignore'';
+    treei  = ''${pkgs.tree}/bin/tree'';
     rm    = "rm -rf";
-
-    # a deleted one in a recurrence = failed
-    # else completed = success
-    # `habit`
-    # `habit delete 1`
-    # `habit complete 1`
-    habit = "task rc.data.location=~/.habit";
 
     run           = "rofi -show drun";
     emoji         = "rofi -show emoji"; # emojis broken.
@@ -91,6 +86,15 @@ let common_initextra = ''
 
     o       = "xdg-open";
     hms     = "home-manager switch --flake ~/.config/home-manager/#${home-id}";
+
+    # update all sub-flakes, too.
+    fhms     = "home-manager switch 
+                --update-input zsh
+                --update-input colors
+                --update-input st
+                --update-input helix
+                --flake ~/.config/home-manager/#${home-id}";
+
     weather = "curl wttr.in/London";
   };
 }

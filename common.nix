@@ -36,6 +36,8 @@
       hyperfine # time alt
       huniq 
       inetutils # telnet, etc
+      moreutils # errno
+      scrcpy
 
       timewarrior
       buku # bookmarks
@@ -63,7 +65,6 @@
       zip
       openssl
       socat
-
 
       # `fc-list`
       hack-font

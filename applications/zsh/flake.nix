@@ -34,6 +34,10 @@
     };
   };
   outputs = inputs@{ ... }:
+    # let
+    #   system = "x86_64-linux";
+    #   pkgs = nixpkgs.legacyPackages.${system};
+    # in
     {
       # doesn't even use HM...
       homeManagerModules.default =

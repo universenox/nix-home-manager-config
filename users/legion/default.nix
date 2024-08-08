@@ -28,12 +28,16 @@
       firefox
       leetcode-cli
 
-      # zoom-us
+      zoom-us
       # slack
       # element-desktop
 
+      path-of-building # for PoE
+
       android-studio
       android-file-transfer # mainly for eink device since phone has syncthing
+
+      citrix_workspace
 
       anki
 

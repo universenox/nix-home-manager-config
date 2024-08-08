@@ -29,20 +29,19 @@
       branch = {
         autoSetupMerge = true;
         autoSetupRebase = "always"; # pull rebases instead of merge
-        fetch = { 
-          prune = true; 
-          pruneTags = true;
-        };
-        pull = { rebase = true; };
-        rebase = {
-          autoSquash = true;
-          autoStash = true; # before rebase, then applies after.
-        };
-        merge = {
-          ff = "only";
-          log = true;
-        };
-
+      };
+      fetch = { 
+        prune = true; 
+        pruneTags = true;
+      };
+      pull = { rebase = true; };
+      rebase = {
+        autoSquash = true;
+        autoStash = true; # before rebase, then applies after.
+      };
+      merge = {
+        ff = "only";
+        log = true;
       };
       rerere = {
         # reuse recorded resolutions

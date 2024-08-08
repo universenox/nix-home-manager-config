@@ -14,6 +14,10 @@
           F     = " | fzf";
           T     = " | tail";
           H     = " | head";
+
+          # remove nix/store/hash- prefix
+          unnix = "| sd '/nix/store/(.*)?-(.*?):' '$2'"
+          
           "LL"  = "2>&1 | less";
           "CA"  = "2>&1 | cat -A";
           "NE"  = "2 > /dev/null";
