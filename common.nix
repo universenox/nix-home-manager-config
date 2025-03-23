@@ -1,5 +1,5 @@
 # common across all configurations
-{ pkgs,... }:
+{ pkgs, lib, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
@@ -9,9 +9,31 @@
   imports = [
     ./applications/git.nix
     ./applications/tmux.nix
+    ./applications/rofi
     ./config/shell_aliases_fns.nix
     ./config/starship_prompt.nix
   ];
+
+  # Lots of config does not belong in nix. It's very dynamic / doesn't utilize any nix stuff.
+  # So, we just use nix to create the symlinks. Config is in git.
+  # If it doesn't belong in common, move it to user.
+  home.activation = {
+    directlink = let
+      refPath = "$HOME/.config/home-manager/directly-refd";
+    in
+    lib.hm.dag.entryAfter [ "writeBoundary" ] (''
+      $DRY_RUN_CMD ln -sfvn ${refPath}/shell-extra $HOME/.shell-extra
+
+      $DRY_RUN_CMD : mkdir $HOME/bin
+      for x in $(ls ${refPath}/bin); do
+        $DRY_RUN_CMD ln -sfvn $(realpath ${refPath}/bin/$x) $HOME/bin/
+      done
+
+      for x in $(ls ${refPath}/config/); do
+        $DRY_RUN_CMD ln -sfvn $(realpath $x) $HOME/.config/
+      done
+    '');
+  };
 
   home = {
     stateVersion = "23.11"; # no touchy
@@ -22,10 +44,7 @@
     };
 
     packages = with pkgs; [
-      stdmanpages # gcc c++ std
-      linux-manual # linux kernel API
-      man-pages # linux dev
-    
+      # generic CLI tools
       lnav # log navigator, amazing.
       ripgrep
       fd       # find alt
@@ -34,50 +53,70 @@
       lsd # ls alt
       choose # cut alt
       hyperfine # time alt
-      huniq 
+      huniq
+      zip
+      ranger # cli file browser
+      file # optional dep of ranger
+      fastfetch
+      tokei # count LoC
+      tealdeer # tldr alt
+      xclip
+
+      ############################
+      # dev tools
+      ############################      
+      stdmanpages # gcc c++ std
+      linux-manual # linux kernel API
+      man-pages # linux dev
+
       inetutils # telnet, etc
       moreutils # errno
-      scrcpy
+      socat
+
+      # vscode # apparently has a great MR-resolver / git utils; must check out.
+
+      jinja2-cli
+      jq
+      miller # like jq but for any tabular
+      yq # jq for yaml
+      sqlfluff # sql formatter / linter
+
+      shellcheck
+      shfmt
+  
+      nix-tree
+      nixfmt
+
+      marksman
+      dprint
+
+      nil # nix lang serv
+      vscode-langservers-extracted # html css json eslint
+      ############################      
 
       timewarrior
       buku # bookmarks
       lazygit
       btop
 
-      ranger # cli file browser
-      file # optional dep of ranger
-      fastfetch
-
-      nixpkgs-fmt
-      nix-tree
-      shellcheck
-      shfmt
-      marksman
-      dprint # md
-
-      tokei # count LoC
-      tealdeer # tldr alt
-
       gdu # du alt
-      jq # json
       glow # render markdown in cli
-      miller # like jq but for any tabular
-      zip
       openssl
-      socat
 
-      # `fc-list`
-      hack-font
-      # fira needed for emojis on `lsd`
-      fira-code
+      # can use to generate qr codes of keys. 
+      (gnupg.override({ guiSupport = true; }))
+      paperkey
+      qrencode
+
+      # fonts (`fc-list`)
       fira-code-symbols
-      fira-code-nerdfont
-
-      vscode # apparently has a great MR-resolver / git utils; must check out.
-      xclip
+      nerd-fonts.fira-code
+      noto-fonts-color-emoji
+      nerd-fonts.noto
+      hack-font
     ];
+    file.".dprint.json".source = ./config/dprint.json;
   };
-  home.file.".dprint.json".source = ./config/dprint.json;
  
   programs = {
     atuin.enable = true; # cmd history
@@ -96,5 +135,6 @@
     };
     lesspipe.enable = false; # pita
     bash.enable = true;
+    starship.enable = true;
   };
 }

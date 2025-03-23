@@ -4,14 +4,16 @@
  * appearance
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+ * Note: may need to run fc-cache -r after updating font packages.
  */
 static char *font = 
- "Fira Code:pixelsize=14:antialias=true:autohint=true";
+ "FiraCode Nerd Font:style=Regular:antialias=true:autohint=true";
 
 static char *font2[] = {
- "Noto Color Emoji:style=Regular:pixelsize=14:antialias=true:autohint=true",
- "Fira Code Symbol:pixelsize=14:antialias=true:autohint=true",
- "Noto Sans Mono:pixelsize=14:antialias=true:autohint=true",
+ "NotoMono Nerd Font:pixelsize=14:style=Regular:antialias=true:autohint=true"
+ "Noto Color Emoji:style=Regular:dpi=96:antialias=true:autohint=true"
+ "Fira Code Symbol:pixelsize=14:style=Regular:antialias=true:autohint=true"
+ "Noto Sans Mono:pixelsize=14:style=Regular:antialias=true:autohint=true"
 };
 static int borderpx = 2;
 

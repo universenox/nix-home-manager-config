@@ -25,7 +25,9 @@
     name = "cpp" 
     auto-format = true
     language-servers = [ { name = "clangd" } ]
-    formatter = { command = "clang-format", args = ["--style=LLVM",  "--assume-filename=cpp.cpp"] }
+    formatter = { command = "clang-format", args = ["--style={BasedOnStyle: llvm, ColumnLimit 110 }",
+                          "--assume-filename=cpp.cpp",
+                          "--sort-includes"] }
 
     [[language]]
     name = "markdown"

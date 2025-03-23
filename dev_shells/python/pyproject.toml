@@ -1,14 +1,12 @@
 [tool.poetry]
-name = "default"
+name = "gen dev"
 version = "0.1.0"
 description = ""
 authors = ["Kimberly Swanson <khswanson24@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-supernotelib = "^0.5.0"
-
+pandas = "^2.2.3"
 
 [build-system]
 requires = ["poetry-core"]

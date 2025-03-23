@@ -1,0 +1,65 @@
+#!/usr/bin/env nix-shell 
+#!nix-shell -i bash -p nix choose moreutils ripgrep sd
+#
+# Usage: update_flake_to_channel [LOCKFILE]...
+lockfiles=("$@")
+if [[ "${#lockfiles[@]}" == 0 ]]; then
+  lockfiles=(./flake.lock)
+fi
+
+# A small utility to address the main downside of nix flakes: multiple copies of nixpkgs.
+# Run this for all flakes that refer to nixpkgs (all of them, basically).
+# If this breaks the flake, simply restore the flake.lock
+# 
+# Note: If a flake command forces the nixpkgs to update, verify that the input
+# in flake.nix matches (case sensitive?).
+
+reference_nixpkgs=\
+$(cat << EOF
+{
+	"nixpkgs": {
+		"locked": {
+			"lastModified": 1742422364,
+			"narHash": "sha256-mNqIplmEohk5jRkqYqG19GA8MbQ/D4gQSK0Mu4LvfRQ=",
+			"owner": "nixos",
+			"repo": "nixpkgs",
+			"rev": "a84ebe20c6bc2ecbcfb000a50776219f48d134cc",
+			"type": "github"
+		},
+		"original": {
+			"owner": "nixos",
+			"ref": "nixos-unstable",
+			"repo": "nixpkgs",
+			"type": "github"
+		}
+	}
+}
+EOF
+)
+
+echo "using the following hardcoded reference nixpkgs: $reference_nixpkgs"
+
+function update_lockfile(){
+  LOCKFILE=$1
+  dups=$(rg -o '"nixpkgs": "(nixpkgs_\d+)"' -r '$1' $LOCKFILE)
+
+  if [ ${#dups[@]} -eq 0 ]; then
+    exit 0
+  fi
+  echo "detected dups $dups in $LOCKFILE"
+  
+  for dup in ${dups[@]}; do
+    # delete the definitions of the duplicate.
+    jq "del(.nodes.${dup})" $LOCKFILE | sponge $LOCKFILE
+    # replace the references to that duplicate definitions to the main nixpkgs.
+    sd "$dup" "nixpkgs" $LOCKFILE
+  done
+  # point main nixpkgs at reference nixpkgs
+  jq ".nodes.nixpkgs = $(echo $reference_nixpkgs | jq '.nixpkgs')" $LOCKFILE | sponge $LOCKFILE
+
+  echo "update $LOCKFILE complete. Please verify that the updated file works."  
+}
+
+for lockfile in ${lockfiles[@]}; do
+  update_lockfile $lockfile
+done

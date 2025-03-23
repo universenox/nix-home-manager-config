@@ -13,7 +13,7 @@
       "d"              = "diff";
       "wip"            = ''commit -m "WIP"'';
       "rerere-clearall"= ''rm -rf ./.git/rr-cache/''; # oopsie. 
-      "lightclone" = "git clone --depth=1 --sparse";
+      "lightclone"     = "clone --depth=1 --sparse";
     };
 
     # see man git-config
@@ -57,3 +57,4 @@
     ignores = [ "*~" "*.swp" "*.sync-conflict*" ".stfolder*" "*.orig" "./result/" "**/__pycache__/" ".cache/"];
   };
 }
+ 

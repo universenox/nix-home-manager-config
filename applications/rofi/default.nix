@@ -3,7 +3,7 @@
   home.packages = [ pkgs.wtype ];
 
   home.file.".config/rofi/ktheme.rasi".text =
-    with config.colorScheme.palette;
+    with config.colors.colorScheme.palette;
     ''
       * {
         /* descriptors copied from helix base16 colors */

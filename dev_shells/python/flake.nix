@@ -1,22 +1,25 @@
 {
-  description = "Dummy python env";
+  description = "Generic Python dev env";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
-  outputs = inputs @ { nixpkgs, ... }:
+  outputs = { nixpkgs, ... }:
     let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      pythonver = pkgs.python313;
-
-      # populate packages here...
-      # actually, I prefer poetry!?
-      # pythonEnv = pkgs.${pythonver}.withPackages (p: with p; [ ]);
     in
-    with pkgs;{
+    with pkgs; {
       devShells.x86_64-linux.default = mkShell {
-        name = "pythonshell";
-        packages = with pkgs; [ pythonver poetry ];
+        name = "pyshell";
+        # python packages are difficult. Prefer if nix has it, else use a python package manager (ie poetry)
+        packages = with pkgs; [ 
+          (python3.withPackages(p: with p; [
+            jupyter
+            pandas
+            numpy
+            matplotlib
+          ]))
+          poetry
+        ];
       };
     };
 }
-

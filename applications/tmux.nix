@@ -6,7 +6,7 @@
     mouse = true;
     tmuxinator.enable = true; # sessions
     escapeTime = 0;
-    terminal = "st";
+    terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = "
     # DESIGN TWEAKS

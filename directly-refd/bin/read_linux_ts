@@ -1,0 +1,7 @@
+#!/usr/bin/env nix-shell 
+#!nix-shell -i bash -p nix choose moreutils ripgrep sd
+
+local nanoseconds=$1
+local seconds=$((nanoseconds / 1000000000 ))
+local nanoseconds_remainder=$((nanoseconds % 1000000000 ))
+date -d "@$seconds" +"+Y-%m-%d %H:%M:%S.$(printf '%09d' $nanoseconds_remainder)

@@ -7,14 +7,11 @@
     helix.url = "path:applications/helix";
     colors.url = "path:colors/";
     st.url = "path:applications/st";
-
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { nixpkgs, home-manager, zsh, helix, colors, st,... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      # pkgs = import nixpkgs { inherit system; overlays = [ ]; };
 
       mkHome = home-id: {
         name = "${home-id}";
@@ -26,7 +23,7 @@
             zsh.homeManagerModules.default
             colors.homeManagerModules.default
             st.homeManagerModules.default
-            helix.homeManagerModules.default
+            helix.homeManagerModules.default # basically my IDE
             ./common.nix
             ./users/${home-id}
           ];
@@ -35,6 +32,6 @@
     in
     {
       homeConfigurations =
-        (builtins.listToAttrs (map mkHome [ "legion" "work" "vps" ]));
+        (builtins.listToAttrs (map mkHome [ "personal" "work" ]));
     };
 }
