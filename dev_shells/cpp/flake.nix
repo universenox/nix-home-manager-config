@@ -1,12 +1,11 @@
 {
   description = "Generic Modern C++ dev env";
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
   outputs = { nixpkgs, ... }:
     let
-      pkgs = (import <nixpkgs> {});
-      # pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.
       llvmPackages = pkgs.llvmPackages_18;
 
       # comment this out to use default gcc one.

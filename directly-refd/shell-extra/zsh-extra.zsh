@@ -1,6 +1,7 @@
 nd() { nix develop "$1" --command zsh }
 
 alias cppshell="nd ~/.config/home-manager/dev_shells/cpp"
+alias binshell="nd ~/.config/home-manager/dev_shells/bin_debug"
 alias pyshell="nd ~/.config/home-manager/dev_shells/python"
 
 # global aliases.
@@ -66,8 +67,13 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	*) git log --color=always $word ;;
 	esac'
 
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+
 # start into the one tmux session for your user...
 if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    cd $HOME && tmux new-session -A -s ${USER} >/dev/null 2>&1
+		cd $HOME
+		# creates one tmux group; all new shells will start attached to this (shares windows, but not dup)
+    tmux new-session -t main >/dev/null 2>&1
 fi      
 

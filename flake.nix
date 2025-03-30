@@ -2,11 +2,21 @@
   description = "Home Manager configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zsh.url = "path:applications/zsh";
-    helix.url = "path:applications/helix";
+
+    helix = {
+      url = "path:applications/helix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     colors.url = "path:colors/";
     st.url = "path:applications/st";
+
   };
   outputs = { nixpkgs, home-manager, zsh, helix, colors, st,... }:
     let

@@ -11,7 +11,9 @@
 
       # w
       zoom-us
-      citrix_workspace
+
+      # unable to use most recent update.
+      citrix_workspace_24_08_0
 
       anki
       yt-dlp

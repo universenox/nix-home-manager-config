@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
+  xdg.enable = true;
 
   # note the modules in my flake are also "common"
   imports = [
@@ -24,10 +25,7 @@
     lib.hm.dag.entryAfter [ "writeBoundary" ] (''
       $DRY_RUN_CMD ln -sfvn ${refPath}/shell-extra $HOME/.shell-extra
 
-      $DRY_RUN_CMD : mkdir $HOME/bin
-      for x in $(ls ${refPath}/bin); do
-        $DRY_RUN_CMD ln -sfvn $(realpath ${refPath}/bin/$x) $HOME/bin/
-      done
+      $DRY_RUN_CMD ln -sfvn ${refPath}/bin $HOME/bin
 
       for x in $(ls ${refPath}/config/); do
         $DRY_RUN_CMD ln -sfvn $(realpath $x) $HOME/.config/

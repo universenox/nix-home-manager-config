@@ -1,0 +1,31 @@
+#!/usr/bin/env nix-shell 
+#!nix-shell -i bash -p nix choose moreutils ripgrep sd
+#
+# Usage: update_flake_to_channel [LOCKFILE]...
+# Updates the given lockfile(s) to use HM's nixpkgs 
+# If no lockfile is given, uses the one in the cwd
+# 
+
+lockfiles=("$@")
+if [[ "${#lockfiles[@]}" == 0 ]]; then
+  lockfiles=(./flake.lock)
+fi
+
+# use my hm nixpkgs in the given flake.lock
+HM_DIR=$HOME/.config/home-manager
+reference_nixpkgs=$(jq '.nodes.nixpkgs' $HM_DIR/flake.lock)
+
+echo "using the following hardcoded reference nixpkgs: $reference_nixpkgs"
+
+function update_lockfile(){
+  LOCKFILE=$1
+
+  # point top-level nixpkgs at reference nixpkgs
+  # input.follows is required for any other ones.
+  jq ".nodes.nixpkgs = $reference_nixpkgs" $LOCKFILE | sponge $LOCKFILE
+  echo "updated $LOCKFILE. please verify this works."  
+}
+
+for lockfile in ${lockfiles[@]}; do
+  update_lockfile $lockfile
+done
