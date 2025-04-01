@@ -1,11 +1,11 @@
 { home-id, ... }:
 let
-  common_initextra = ''
+  common_init = suffix: ''
     export HM_HOME_ID=${home-id}
-    source $HOME/.shell-extra/initextra.sh
+    source $HOME/.shell-extra/initextra.${suffix}
   '';
 in
 {
-  programs.bash.initExtra = common_initextra;
-  programs.zsh.initExtra = common_initextra;
+  programs.bash.initExtra = common_init "sh";
+  programs.zsh.initExtra = common_init "zsh";
 }

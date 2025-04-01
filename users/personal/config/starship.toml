@@ -20,19 +20,6 @@ add_newline = true
 follow_symlinks = true
 
 ######################3
-# work env vars
-[env_var.RUNTIME_DOMAIN]
-variable='RUNTIME_DOMAIN'
-format='[$env_value ]($style)'
-style="purple"
-disabled=false
-
-[env_var.SECOND]
-variable='SECOND'
-format='[$env_value ]($style)'
-style="blue"
-disabled=false
-######################3
 
 [character]
 format = "$symbol "

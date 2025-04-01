@@ -6,6 +6,10 @@
     mouse = true;
     clock24 = true;
     historyLimit = 20000;
+    escapeTime = 0;
+    terminal = "screen-256color";
+    shell = "${pkgs.zsh}/bin/zsh";
+    customPaneNavigationAndResize = true;
 
     # prefix + ctrl+s/r to save/restore
     plugins = with pkgs.tmuxPlugins; [
@@ -17,11 +21,6 @@
         '';
       }
     ];
-    
-    escapeTime = 0;
-    terminal = "screen-256color";
-    shell = "${pkgs.zsh}/bin/zsh";
-    customPaneNavigationAndResize = true;
 
     extraConfig = ''
       # DESIGN TWEAKS

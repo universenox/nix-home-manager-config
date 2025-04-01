@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }@inputs:
 {
   programs.zsh = {
       enable = true;
@@ -7,6 +7,15 @@
       syntaxHighlighting.enable = true;
       sessionVariables = {
         ZSH_AUTOSUGGEST_STRATEGY = [ "history" "completion" ];
+      };
+      envExtra = ''
+        setopt no_global_rcs
+      '';
+      history = {
+        append = true;
+        ignoreAllDups = true;
+        save = 20000;
+        size = 20000;
       };
       plugins =
         let

@@ -7,6 +7,3 @@ Usage is ie:
 
 If contents of a subdirectory's flake are changed, it requires a 
 call to `nix flake lock --update-input <input>` for the top-level flake.
-
-See my `update_flake_to_channel` command that forces all references to "nixpkgs"
-to point to a single hardcoded one (bc I don't want multiple copies of nixpkgs).

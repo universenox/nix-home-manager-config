@@ -41,6 +41,6 @@
     {
       # doesn't even use HM...
       homeManagerModules.default =
-        (import ./default.nix { inherit inputs;  }); 
+        (import ./default.nix inputs); 
     };
 }

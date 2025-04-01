@@ -8,7 +8,7 @@
       ShowAKA: Yes
   '';
   home.file.".config/helix/languages.toml".text = ''
-    use-grammars = { only = [ "cpp" ] }
+    use-grammars = { only = [ "cpp", "python" ] }
 
     [language-server.clangd]
     command = "clangd"
@@ -41,5 +41,9 @@
     settings.editor = {
       rulers = [ 80 120 ];
     };
+  };
+  home.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
   };
 }

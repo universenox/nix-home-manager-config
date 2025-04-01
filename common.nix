@@ -1,5 +1,5 @@
 # common across all configurations
-{ pkgs, lib, ... }:
+{ pkgs, lib, home-id, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable = true;
@@ -12,34 +12,56 @@
     ./applications/tmux.nix
     ./applications/rofi
     ./config/shell_aliases_fns.nix
-    ./config/starship_prompt.nix
   ];
 
   # Lots of config does not belong in nix. It's very dynamic / doesn't utilize any nix stuff.
   # So, we just use nix to create the symlinks. Config is in git.
-  # If it doesn't belong in common, move it to user.
+  # If it doesn't belong in common, move it to module.
   home.activation = {
     directlink = let
       refPath = "$HOME/.config/home-manager/directly-refd";
     in
     lib.hm.dag.entryAfter [ "writeBoundary" ] (''
+      #####
+      # common
+      #####
       $DRY_RUN_CMD ln -sfvn ${refPath}/shell-extra $HOME/.shell-extra
 
       $DRY_RUN_CMD ln -sfvn ${refPath}/bin $HOME/bin
 
+      $DRY_RUN_CMD ln -sfvn -t $HOME/.config ${refPath}/config
+
       for x in $(ls ${refPath}/config/); do
-        $DRY_RUN_CMD ln -sfvn $(realpath $x) $HOME/.config/
+        $DRY_RUN_CMD ln -sfvn $(realpath $x) $HOME/.config
       done
+
+      #####
+      # module-specific
+      #####
+       
+      HMU=$HOME/.config/home-manager/users/${home-id}
+
+      if [ -f $HMU/shell-extra/initextra.sh ]; then
+        $DRY_RUN_CMD ln -sfvn $HMU/shell-extra $HOME/.shell-extra/module
+      fi
+
+      # this will end up having the common one symlink to the module one.
+      # it's fine!
+      # module-specific config
+      if [ -d $HMU/config ]; then
+        $DRY_RUN_CMD ln -sfv -t $HOME/.config $HMU/config/*
+      fi
+
+      # module-specific bin
+      if [ -d $HMU/bin ]; then
+        $DRY_RUN_CMD ln -sfv -t $HOME/.config $HMU/bin/*
+      fi
     '');
   };
 
   home = {
     stateVersion = "23.11"; # no touchy
     keyboard.layout = "us";
-    sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
-    };
 
     packages = with pkgs; [
       # generic CLI tools
@@ -78,6 +100,7 @@
       miller # like jq but for any tabular
       yq # jq for yaml
       sqlfluff # sql formatter / linter
+      colorized-logs # ansi2txt remove color codes
 
       shellcheck
       shfmt
@@ -117,7 +140,14 @@
   };
  
   programs = {
-    atuin.enable = true; # cmd history
+    atuin = { # cmd history
+      enable = true;
+      settings = {
+        auto_sync = false;
+        filter_mode = "global";
+        filter_mode_shell_up_keybinding = "session";
+      };
+    };
     fzf = {
       enable = true;
       tmux.enableShellIntegration = true;
@@ -132,7 +162,17 @@
       nix-direnv.enable = true;
     };
     lesspipe.enable = false; # pita
-    bash.enable = true;
+    bash = {
+      enable = true;
+      historyFileSize = 20000;
+      historySize = 20000;
+      shellOptions = [
+        "histappend"
+        "checkwinsize"
+        "extglob"
+        "checkjobs"
+      ];
+    };
     starship.enable = true;
   };
 }
