@@ -40,6 +40,7 @@
     defaultEditor = true;
     settings.editor = {
       rulers = [ 80 120 ];
+      true-color = true; # ???
     };
   };
   home.sessionVariables = {

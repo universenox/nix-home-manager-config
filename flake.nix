@@ -23,25 +23,27 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      mkHome = home-id: {
+      commonModules = [
+        zsh.homeManagerModules.default
+        colors.homeManagerModules.default
+        helix.homeManagerModules.default
+        ./common.nix
+      ];
+
+      mkHome = { home-id, additionalModules ? [] }: {
         name = "${home-id}";
         value = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit home-id colors; };
-          modules = 
-          [
-            zsh.homeManagerModules.default
-            colors.homeManagerModules.default
-            st.homeManagerModules.default
-            helix.homeManagerModules.default # basically my IDE
-            ./common.nix
-            ./users/${home-id}
-          ];
+          modules = commonModules ++ additionalModules ++ [ ./users/${home-id} ];
         };
       };
     in
     {
       homeConfigurations =
-        (builtins.listToAttrs (map mkHome [ "personal" "work" ]));
+        (builtins.listToAttrs (map mkHome [
+          { home-id="personal"; additionalModules = [ st.homeManagerModules.default ]; }
+          { home-id="work";  } # this is a stub because I'm not uploading my full work configuration to github. 
+        ]));
     };
 }

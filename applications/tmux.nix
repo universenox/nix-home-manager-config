@@ -7,7 +7,7 @@
     clock24 = true;
     historyLimit = 20000;
     escapeTime = 0;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     shell = "${pkgs.zsh}/bin/zsh";
     customPaneNavigationAndResize = true;
 

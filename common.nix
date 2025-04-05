@@ -11,53 +11,8 @@
     ./applications/git.nix
     ./applications/tmux.nix
     ./applications/rofi
-    ./config/shell_aliases_fns.nix
+    ./config/shell_dothm.nix
   ];
-
-  # Lots of config does not belong in nix. It's very dynamic / doesn't utilize any nix stuff.
-  # So, we just use nix to create the symlinks. Config is in git.
-  # If it doesn't belong in common, move it to module.
-  home.activation = {
-    directlink = let
-      refPath = "$HOME/.config/home-manager/directly-refd";
-    in
-    lib.hm.dag.entryAfter [ "writeBoundary" ] (''
-      #####
-      # common
-      #####
-      $DRY_RUN_CMD ln -sfvn ${refPath}/shell-extra $HOME/.shell-extra
-
-      $DRY_RUN_CMD ln -sfvn ${refPath}/bin $HOME/bin
-
-      $DRY_RUN_CMD ln -sfvn -t $HOME/.config ${refPath}/config
-
-      for x in $(ls ${refPath}/config/); do
-        $DRY_RUN_CMD ln -sfvn $(realpath $x) $HOME/.config
-      done
-
-      #####
-      # module-specific
-      #####
-       
-      HMU=$HOME/.config/home-manager/users/${home-id}
-
-      if [ -f $HMU/shell-extra/initextra.sh ]; then
-        $DRY_RUN_CMD ln -sfvn $HMU/shell-extra $HOME/.shell-extra/module
-      fi
-
-      # this will end up having the common one symlink to the module one.
-      # it's fine!
-      # module-specific config
-      if [ -d $HMU/config ]; then
-        $DRY_RUN_CMD ln -sfv -t $HOME/.config $HMU/config/*
-      fi
-
-      # module-specific bin
-      if [ -d $HMU/bin ]; then
-        $DRY_RUN_CMD ln -sfv -t $HOME/.config $HMU/bin/*
-      fi
-    '');
-  };
 
   home = {
     stateVersion = "23.11"; # no touchy
@@ -65,7 +20,7 @@
 
     packages = with pkgs; [
       # generic CLI tools
-      lnav # log navigator, amazing.
+      lnav # log navigator, amazing, just add your own json config o describe the logfile (if it's not already supported automatically).
       ripgrep
       fd       # find alt
       tree
@@ -140,6 +95,20 @@
   };
  
   programs = {
+    # see applications/zsh.nix  for zsh.
+    bash = {
+      enable = true;
+      historyFileSize = 20000;
+      historySize = 20000;
+      shellOptions = [
+        "histappend"
+        "checkwinsize"
+        "extglob"
+        "checkjobs"
+      ];
+    };
+    starship.enable = true;
+
     atuin = { # cmd history
       enable = true;
       settings = {
@@ -162,17 +131,5 @@
       nix-direnv.enable = true;
     };
     lesspipe.enable = false; # pita
-    bash = {
-      enable = true;
-      historyFileSize = 20000;
-      historySize = 20000;
-      shellOptions = [
-        "histappend"
-        "checkwinsize"
-        "extglob"
-        "checkjobs"
-      ];
-    };
-    starship.enable = true;
   };
 }
